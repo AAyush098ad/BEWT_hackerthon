@@ -1,28 +1,37 @@
-# 📄 Resume Builder
+# 📄 me resu-me
 
-A full-stack web application that helps users create, customize, and export professional resumes in minutes. Built with a guided step-by-step wizard, 19 themes, and 14 professionally designed templates.
+A full-stack resume builder that creates, customizes, and exports professional resumes. Features 32 templates, 19 themes, photo upload, PDF watermark, QR codes with logos, analytics, password-protected sharing, and a guided 6-step wizard — all in one self-contained application.
 
-![Resume Builder Banner](https://img.shields.io/badge/Resume-Builder-4f46e5?style=for-the-badge&logo=adobe-acrobat-reader&logoColor=white)
+![Resume Builder Banner](https://img.shields.io/badge/me_resu--me-4f46e5?style=for-the-badge&logo=adobe-acrobat-reader&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 
 ---
 
 ## ✨ Features
 
-- **User Authentication** — Secure registration and login using JWT and bcrypt-hashed passwords
-- **Guided 6-Step Wizard** — Heading → Work History → Education → Skills → Summary → Finalize
-- **19 Built-in Themes** — 9 light themes and 10 dark themes, switchable from a palette menu
-- **14 Resume Templates** — Classic, Modern, Minimal, Creative, Elegant, Bold, Compact, Professional, Two Column, Timeline, Executive, Designer, Tech, Academic
-- **Live Preview** — See your resume update in real-time as you type
-- **Auto-Save** — Every keystroke is saved to the database automatically
-- **Real PDF Export** — One-click download of a print-ready, ATS-friendly PDF using `html2pdf.js`
-- **Public Sharing** — Publish any resume and get a unique shareable URL
-- **Multiple Resumes** — Create, edit, duplicate, and delete as many resumes as you want
-- **Responsive Design** — Works seamlessly on desktop, tablet, and mobile
-- **Dark Mode Support** — Every theme has proper dark/light variants with seamless switching
+- **📝 Guided 6-Step Wizard** — Heading → Work History → Education → Skills → Summary → Finalize
+- **🎨 19 Built-in Themes** — 9 light + 10 dark themes, switchable from a palette menu
+- **📄 32 Resume Templates** — 26 classic layouts + 6 seasonal (Halloween, Holiday, Spring, Summer, Autumn, Winter)
+- **📥 Import from Templates** — 6 pre-filled sample resumes for common roles (Backend Dev, Frontend Dev, Designer, Data Analyst, Product Manager, Teacher)
+- **📸 Photo Upload** — Auto-crops to 240×240 JPEG at ~20 KB per photo
+- **💧 PDF Watermark** — Optional "me resu-me" watermark repeated across exported PDFs
+- **📱 QR Code with Logo** — Branded QR with your initials in the center
+- **📊 Analytics** — Views, last 30 days, 14-day bar chart, sparklines on dashboard cards
+- **🔒 Password Publish** — Protect any public resume link with a password
+- **📤 Share with Recruiter** — Send a resume to a recruiter email; they see it in a Recruiter Inbox
+- **🌍 Multi-language** — English, Spanish, Hindi
+- **🖋️ Font & Color Customization** — 6 fonts, 12 accent colors + custom color picker
+- **🔀 Drag-and-Drop Section Reorder** — Reorder Summary/Experience/Education/Skills
+- **🔗 Social Links** — LinkedIn, GitHub, Twitter with inline SVG icons
+- **🌙 Auto Dark Mode** — Follows your OS preference on first visit
+- **👥 Role-Based Dashboards** — Register as Job Seeker or Recruiter
+- **💾 Real PDF Export** — One-click download of a print-ready, ATS-friendly PDF
+- **📦 Multiple Resumes** — Create, edit, duplicate, and delete as many as you want
+- **📱 Responsive Design** — Works seamlessly on desktop, tablet, and mobile
 
 ---
 
@@ -30,7 +39,7 @@ A full-stack web application that helps users create, customize, and export prof
 
 ### Frontend
 - **HTML5** — Semantic markup, single-page-application feel
-- **CSS3** — Custom properties (CSS variables) for theming, Flexbox & Grid layouts
+- **CSS3** — CSS custom properties for theming, Flexbox & Grid, clip-path, animations
 - **Vanilla JavaScript** — Hash-based routing, DOM manipulation, fetch API
 
 ### Backend
@@ -46,15 +55,16 @@ A full-stack web application that helps users create, customize, and export prof
 
 ### Libraries (CDN)
 - **html2pdf.js** — Client-side PDF generation
-- **Google Fonts** — Inter & Playfair Display typefaces
+- **qrcodejs** — QR code generation
+- **Google Fonts** — Inter, Playfair Display, Roboto, Lora, Montserrat, Merriweather, JetBrains Mono
 
 ---
 
 ## 📸 Screenshots
 
-> Add your own screenshots here after hosting. Suggested images:
+> _Add your own screenshots here after hosting. Suggested images:_
 
-| Landing Page | Templates Page |
+| Landing Page | Templates Gallery |
 |---|---|
 | ![Landing](docs/landing.png) | ![Templates](docs/templates.png) |
 
@@ -62,13 +72,16 @@ A full-stack web application that helps users create, customize, and export prof
 |---|---|
 | ![Editor](docs/editor.png) | ![PDF](docs/pdf.png) |
 
+| Dashboard with Analytics | QR Code with Logo |
+|---|---|
+| ![Dashboard](docs/dashboard.png) | ![QR](docs/qr.png) |
+
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-Make sure you have the following installed:
 - **Node.js** v18 or later ([download](https://nodejs.org))
 - **npm** (comes with Node.js)
 - **Git** ([download](https://git-scm.com))
@@ -77,5 +90,5 @@ Make sure you have the following installed:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/resume-builder.git
-   cd resume-builder
+   git clone https://github.com/AAyush098ad/BEWT_hackerthon.git
+   cd BEWT_hackerthon
