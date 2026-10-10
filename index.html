@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resume Builder — Create a Professional Resume</title>
+<title>me resu-me — Persistence is a protocol.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&family=Roboto:wght@400;500;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&family=Roboto:wght@400;500;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Merriweather:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="newTemplates.js"></script>
 <style>
 :root {
   --bg:#f8fafc;--surface:#fff;--surface-alt:#f1f5f9;--border:#e2e8f0;--text:#0f172a;--text-muted:#64748b;
@@ -122,6 +121,9 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
 .templates-page .header-block{text-align:center;margin-bottom:56px;}
 .templates-page h1{font-size:clamp(2rem,4vw,2.8rem);font-weight:800;letter-spacing:-.02em;margin-bottom:12px;}
 .templates-page .header-block p{color:var(--text-muted);font-size:1.05rem;max-width:600px;margin:0 auto;}
+.templates-actions{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap;}
+.templates-section-title{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--text-muted);margin:48px 0 20px;display:flex;align-items:center;gap:12px;}
+.templates-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 .templates-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px;}
 .tpl-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-lg);padding:14px;cursor:pointer;transition:all .3s;display:flex;flex-direction:column;}
 .tpl-card:hover{border-color:var(--primary);transform:translateY(-6px);box-shadow:var(--shadow-xl);}
@@ -130,15 +132,24 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
 .tpl-card h3{font-size:.95rem;font-weight:700;}
 .tpl-card p{font-size:.78rem;color:var(--text-muted);}
 .tpl-card .tpl-badge{font-size:.65rem;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--primary-light);color:var(--primary);}
+.tpl-card .tpl-badge.seasonal{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;}
 
-/* MINI PREVIEWS */
+/* SAMPLE RESUME CARDS */
+.sample-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.sample-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;cursor:pointer;transition:all .25s;display:flex;flex-direction:column;gap:8px;text-align:left;}
+.sample-card:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.sample-card .sample-emoji{font-size:2rem;line-height:1;}
+.sample-card h4{font-size:.95rem;font-weight:700;margin-top:4px;}
+.sample-card p{font-size:.78rem;color:var(--text-muted);}
+.sample-card .sample-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:999px;background:var(--primary-light);color:var(--primary);align-self:flex-start;}
+
+/* MINI PREVIEWS (unchanged classics) */
 .mini{width:100%;height:100%;background:#fff;position:relative;font-family:'Inter',sans-serif;overflow:hidden;padding:12px 10px;font-size:4px;color:#222;}
 .mini .line{height:3px;background:#e5e7eb;border-radius:2px;margin:3px 0;}
 .mini .line.s{width:60%;}.mini .line.m{width:80%;}.mini .line.t{width:40%;}
 .mini .name{font-size:8px;font-weight:800;margin-bottom:1px;letter-spacing:-.02em;}
 .mini .role{font-size:5px;font-weight:600;margin-bottom:3px;}
 .mini .contact{font-size:3.5px;color:#888;}
-.mini .photo-circle{width:20px;height:20px;border-radius:50%;background:#cbd5e1;margin-bottom:4px;}
 .mini-classic{text-align:center;padding-top:16px;}
 .mini-classic .name{font-family:'Playfair Display',serif;font-size:11px;}
 .mini-classic .role{color:#2563eb;text-transform:uppercase;letter-spacing:.15em;font-size:4px;}
@@ -273,7 +284,6 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
 .mini-spotlight .body{padding:8px 12px;}
 .mini-spotlight .section-h{font-size:3.5px;font-weight:800;color:#111;letter-spacing:.2em;text-transform:uppercase;margin:5px 0 2px;text-align:center;position:relative;}
 .mini-spotlight .line{background:#e5e7eb;height:2px;margin:2px 0;}
-/* NEW: 6 more templates */
 .mini-diamond{padding:0;}
 .mini-diamond .cap{background:linear-gradient(135deg,#1e40af,#0891b2);padding:14px;clip-path:polygon(0 0,100% 0,50% 100%);color:#fff;}
 .mini-diamond .cap .name{color:#fff;font-size:10px;text-align:center;}
@@ -291,7 +301,7 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
 .mini-aurora .line{background:#fce7f3;height:2px;margin:2px 0;}
 .mini-nordic{padding:0;background:#fefcf7;}
 .mini-nordic .head{padding:14px 12px 8px;border-bottom:2px solid #1e293b;}
-.mini-nordic .head .name{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#1e293b;font-weight:800;}
+.mini-nordic .head .name{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#1e293b;font-weight:800;}
 .mini-nordic .head .role{font-size:3.5px;color:#64748b;letter-spacing:.15em;text-transform:uppercase;}
 .mini-nordic .body{padding:8px 12px;}
 .mini-nordic .section-h{font-size:3.5px;font-weight:800;letter-spacing:.2em;color:#1e293b;text-transform:uppercase;margin:5px 0 2px;border-bottom:1px solid #cbd5e1;padding-bottom:1px;}
@@ -318,6 +328,65 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
 .mini-mono .body{padding:8px 12px;}
 .mini-mono .section-h{font-size:4px;font-weight:900;letter-spacing:.1em;color:#111;text-transform:uppercase;margin:6px 0 2px;background:#f3f4f6;padding:2px 4px;}
 .mini-mono .line{background:#d1d5db;height:2px;margin:2px 0;}
+
+/* ============================================================
+   6 SEASONAL TEMPLATES
+   ============================================================ */
+.mini-halloween{padding:0;background:#1a0f0a;color:#fff;}
+.mini-halloween .head{padding:14px 12px 8px;text-align:center;position:relative;}
+.mini-halloween .head::before{content:'🎃';position:absolute;top:8px;right:10px;font-size:11px;}
+.mini-halloween .head .name{font-family:'Playfair Display',serif;font-size:12px;color:#f97316;letter-spacing:.08em;}
+.mini-halloween .head .role{font-size:3.5px;color:#a78bfa;letter-spacing:.25em;text-transform:uppercase;margin-top:2px;}
+.mini-halloween .body{padding:8px 12px;}
+.mini-halloween .section-h{font-size:4px;font-weight:800;letter-spacing:.15em;color:#f97316;text-transform:uppercase;margin:6px 0 2px;border-bottom:1px solid #4a2e1e;padding-bottom:1px;}
+.mini-halloween .section-h::before{content:'🦇 ';font-size:4px;}
+.mini-halloween .line{background:#3d2a1e;height:2.5px;margin:2px 0;}
+.mini-holiday{padding:0;background:#fefcf7;}
+.mini-holiday .head{padding:14px 12px 8px;text-align:center;position:relative;}
+.mini-holiday .head::before{content:'❄️';position:absolute;top:8px;right:10px;font-size:11px;}
+.mini-holiday .head .name{font-family:'Playfair Display',serif;font-size:12px;color:#166534;}
+.mini-holiday .head .role{font-size:3.5px;color:#b91c1c;letter-spacing:.25em;text-transform:uppercase;margin-top:2px;}
+.mini-holiday .divider{height:1px;background:#dc2626;margin:6px auto;width:30px;}
+.mini-holiday .body{padding:8px 12px;}
+.mini-holiday .section-h{font-size:4px;font-weight:800;letter-spacing:.15em;color:#166534;text-transform:uppercase;margin:6px 0 2px;border-bottom:1px solid #fecaca;padding-bottom:1px;}
+.mini-holiday .section-h::before{content:'✦ ';}
+.mini-holiday .line{background:#e5e7eb;height:2.5px;margin:2px 0;}
+.mini-spring{padding:0;background:linear-gradient(180deg,#fdf2f8,#fff);}
+.mini-spring .head{padding:14px 12px 8px;text-align:center;position:relative;}
+.mini-spring .head::before{content:'🌸';position:absolute;top:8px;right:10px;font-size:11px;}
+.mini-spring .head .name{font-family:'Playfair Display',serif;font-size:12px;color:#be185d;letter-spacing:.05em;}
+.mini-spring .head .role{font-size:3.5px;color:#059669;letter-spacing:.25em;text-transform:uppercase;margin-top:2px;}
+.mini-spring .body{padding:8px 12px;}
+.mini-spring .section-h{font-size:4px;font-weight:800;letter-spacing:.15em;color:#be185d;text-transform:uppercase;margin:6px 0 2px;border-bottom:1px solid #fbcfe8;padding-bottom:1px;}
+.mini-spring .section-h::before{content:'❀ ';}
+.mini-spring .line{background:#fce7f3;height:2.5px;margin:2px 0;}
+.mini-summer{padding:0;background:linear-gradient(180deg,#fef3c7,#fff);}
+.mini-summer .head{padding:14px 12px 8px;text-align:center;position:relative;}
+.mini-summer .head::before{content:'☀️';position:absolute;top:8px;right:10px;font-size:11px;}
+.mini-summer .head .name{font-size:13px;font-weight:900;color:#ea580c;letter-spacing:-.02em;line-height:1;}
+.mini-summer .head .role{font-size:3.5px;color:#0891b2;letter-spacing:.25em;text-transform:uppercase;margin-top:3px;}
+.mini-summer .body{padding:8px 12px;}
+.mini-summer .section-h{font-size:4px;font-weight:800;letter-spacing:.15em;color:#ea580c;text-transform:uppercase;margin:6px 0 2px;border-bottom:1px solid #fde68a;padding-bottom:1px;}
+.mini-summer .section-h::before{content:'◆ ';color:#0891b2;}
+.mini-summer .line{background:#fef3c7;height:2.5px;margin:2px 0;}
+.mini-autumn{padding:0;background:#fef9f3;}
+.mini-autumn .head{padding:14px 12px 8px;text-align:center;position:relative;border-bottom:2px solid #b45309;}
+.mini-autumn .head::before{content:'🍂';position:absolute;top:8px;right:10px;font-size:11px;}
+.mini-autumn .head .name{font-family:'Playfair Display',serif;font-size:12px;color:#7c2d12;letter-spacing:.04em;}
+.mini-autumn .head .role{font-size:3.5px;color:#b45309;letter-spacing:.25em;text-transform:uppercase;margin-top:2px;}
+.mini-autumn .body{padding:8px 12px;}
+.mini-autumn .section-h{font-size:4px;font-weight:800;letter-spacing:.15em;color:#7c2d12;text-transform:uppercase;margin:6px 0 2px;padding-bottom:1px;}
+.mini-autumn .section-h::before{content:'🍁 ';}
+.mini-autumn .line{background:#fde68a;height:2.5px;margin:2px 0;}
+.mini-winter{padding:0;background:linear-gradient(180deg,#eff6ff,#fff);}
+.mini-winter .head{padding:14px 12px 8px;text-align:center;position:relative;}
+.mini-winter .head::before{content:'❄';position:absolute;top:8px;right:10px;font-size:11px;color:#0ea5e9;}
+.mini-winter .head .name{font-size:12px;font-weight:800;color:#0c4a6e;letter-spacing:.08em;}
+.mini-winter .head .role{font-size:3.5px;color:#0891b2;letter-spacing:.3em;text-transform:uppercase;margin-top:3px;}
+.mini-winter .body{padding:8px 12px;}
+.mini-winter .section-h{font-size:4px;font-weight:800;letter-spacing:.15em;color:#0c4a6e;text-transform:uppercase;margin:6px 0 2px;border-bottom:1px solid #bae6fd;padding-bottom:1px;}
+.mini-winter .section-h::before{content:'❅ ';color:#0ea5e9;}
+.mini-winter .line{background:#dbeafe;height:2.5px;margin:2px 0;}
 
 .dashboard{max-width:960px;margin:0 auto;padding:40px 24px 80px;}
 .dashboard-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:16px;}
@@ -349,8 +418,6 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
 .step-number{width:28px;height:28px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;}
 .step-item.active .step-number{background:var(--primary);color:#fff;border-color:var(--primary);}
 .step-item.completed .step-number{background:var(--success);color:#fff;border-color:var(--success);}
-
-/* Animated progress ring */
 .progress-section{margin-top:32px;padding-top:24px;border-top:1px solid var(--border);text-align:center;}
 .progress-ring-wrap{position:relative;display:inline-block;width:120px;height:120px;}
 .progress-ring{transform:rotate(-90deg);}
@@ -373,7 +440,12 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
 .template-option.selected{border-color:var(--primary);background:var(--primary-light);}
 .template-option .tpl-thumb{aspect-ratio:3/4;border-radius:var(--radius-sm);overflow:hidden;margin-bottom:8px;background:#f1f5f9;border:1px solid var(--border);}
 .template-option p{font-size:.8rem;font-weight:600;color:var(--text-muted);}
-.resume-preview-wrap{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-xl);padding:48px;max-width:800px;margin:24px auto;color:#111;}
+
+.resume-preview-wrap{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-xl);padding:48px;max-width:800px;margin:24px auto;color:#111;position:relative;}
+.resume-preview-wrap.has-watermark{overflow:hidden;}
+.watermark-overlay{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
+.watermark-overlay::before{content:'';position:absolute;inset:-50%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Ctext x='0' y='100' font-family='Inter,sans-serif' font-size='28' font-weight='800' fill='rgba(79,70,229,0.07)' transform='rotate(-30 200 100)'%3Eme resu-me%3C/text%3E%3C/svg%3E");background-repeat:repeat;}
+.resume-preview-wrap.has-watermark > *:not(.watermark-overlay){position:relative;z-index:2;}
 .resume-preview-wrap h1{font-size:2rem;font-weight:800;margin-bottom:4px;color:#111;}
 .resume-preview-wrap .job-title{font-size:1rem;font-weight:600;color:var(--primary);margin-bottom:8px;}
 .resume-preview-wrap .contact{font-size:.85rem;color:#555;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
@@ -390,12 +462,13 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
 
 .modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:10000;opacity:0;pointer-events:none;transition:opacity .25s;}
 .modal-overlay.show{opacity:1;pointer-events:auto;}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);padding:28px 32px;max-width:560px;width:calc(100vw - 32px);max-height:calc(100vh - 60px);overflow-y:auto;transform:scale(.95);transition:transform .25s;position:relative;}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);padding:28px 32px;max-width:720px;width:calc(100vw - 32px);max-height:calc(100vh - 60px);overflow-y:auto;transform:scale(.95);transition:transform .25s;position:relative;}
 .modal-overlay.show .modal{transform:scale(1);}
 .modal h3{margin:0 0 16px;font-size:1.2rem;}
 .modal h4{margin:16px 0 8px;font-size:.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;}
 .modal-close{position:absolute;top:12px;right:12px;background:transparent;color:var(--text-muted);padding:6px 10px;font-size:1.2rem;line-height:1;}
 .modal-close:hover{background:var(--surface-alt);color:var(--text);}
+.modal-sub{color:var(--text-muted);font-size:.9rem;margin-bottom:20px;}
 
 .customizer{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
 .customizer h4{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--primary);margin-bottom:10px;}
@@ -468,7 +541,6 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
 .mb-2{margin-bottom:16px;}
 .flex-between{display:flex;justify-content:space-between;align-items:center;}
 .muted{color:var(--text-muted);font-size:.85rem;}
-
 .toggle{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--surface-alt);border-radius:var(--radius-sm);cursor:pointer;}
 .toggle input[type="checkbox"]{width:auto;}
 
@@ -516,7 +588,7 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
       <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
     </svg>
-    Resume Builder
+    me resu-me
   </div>
   <nav id="main-nav">
     <a href="#" data-nav="landing" onclick="navigate('landing');return false;" id="nav-home">Home</a>
@@ -556,9 +628,9 @@ label{display:block;font-size:.78rem;font-weight:700;margin:16px 0 6px;color:var
    TRANSLATIONS
    ============================================================ */
 const TR = {
-  en:{home:'Home',templates:'Templates',dashboard:'Dashboard',inbox:'Recruiter Inbox',myResumes:'My Resumes',newResume:'+ New Resume',heroBadge:'✦ Free Resume Builder',heroTitle:'Build a Professional Resume in Minutes',heroDesc:'26 themes, 26 templates, PDF export, QR codes, analytics, and more.',browseTemplates:'Browse Templates →',noResumes:'No resumes yet. Pick a template.',edit:'Edit',preview:'Preview',publish:'Publish',makePrivate:'Make Private',delete:'Delete',back:'← Back',next:'Next →',finish:'✓ Finish & Preview',heading:'Heading',work:'Work History',education:'Education',skills:'Skills',summary:'Summary',finalize:'Finalize',downloadPdf:'📄 Download PDF',print:'🖨️ Print',customize:'🎨 Customize',analytics:'📊 Analytics',qr:'📱 QR Code',share:'📤 Share with Recruiter',chooseTemplate:'Choose Template',previewLabel:'Preview',sectionOrder:'Section Order',dragToReorder:'Drag to reorder',fontLabel:'Font',colorLabel:'Accent Color',portfolioLink:'Portfolio Link (QR)',totalViews:'Total Views',last30:'Last 30 Days',last14:'Views (Last 14 Days)',inboxTitle:'Recruiter Inbox',inboxEmpty:'No resumes shared with you.',sharedBy:'Shared by',note:'Note',views:'views',close:'Close',login:'Login',register:'Register',email:'Email',password:'Password',fullName:'Full Name',role:'I am a',jobSeeker:'Job Seeker',recruiterRole:'Recruiter',logout:'Logout',registerTitle:'Create Account',shareTitle:'Share with Recruiter',shareDesc:'Enter recruiter email.',cancel:'Cancel',send:'Send',addExperience:'+ Add Experience',addEducation:'+ Add Education',addSkill:'+ Add',saveSummary:'Save Summary',recruiterOnly:'Recruiters only',photoLabel:'Profile Photo (optional)',photoHint:'Square images work best. JPG or PNG under 800 KB.',removePhoto:'Remove Photo',showPhoto:'Show photo on resume',publishSettings:'Publish Settings',passwordProtect:'Password protect this resume',setPassword:'Set Password',socialTitle:'Social Links',linkedin:'LinkedIn URL',github:'GitHub URL',twitter:'Twitter / X URL',saveSettings:'Save Settings',settingsSaved:'Settings saved!',passwordRequired:'This resume is password protected.',enterPassword:'Enter Password',unlock:'Unlock',wrongPassword:'Incorrect password.'},
-  es:{home:'Inicio',templates:'Plantillas',dashboard:'Panel',inbox:'Bandeja',myResumes:'Mis Currículums',newResume:'+ Nuevo',heroBadge:'✦ Creador Gratis',heroTitle:'Crea un Currículum en Minutos',heroDesc:'26 temas, 26 plantillas, PDF, QR, estadísticas.',browseTemplates:'Ver Plantillas →',noResumes:'Sin currículums.',edit:'Editar',preview:'Ver',publish:'Publicar',makePrivate:'Privado',delete:'Eliminar',back:'← Atrás',next:'Siguiente →',finish:'✓ Finalizar',heading:'Encabezado',work:'Experiencia',education:'Educación',skills:'Habilidades',summary:'Resumen',finalize:'Finalizar',downloadPdf:'📄 PDF',print:'🖨️ Imprimir',customize:'🎨 Personalizar',analytics:'📊 Estadísticas',qr:'📱 QR',share:'📤 Compartir',chooseTemplate:'Elegir',previewLabel:'Vista Previa',sectionOrder:'Orden',dragToReorder:'Arrastra',fontLabel:'Fuente',colorLabel:'Color',portfolioLink:'Portafolio (QR)',totalViews:'Vistas',last30:'30 Días',last14:'14 Días',inboxTitle:'Bandeja',inboxEmpty:'Vacía',sharedBy:'De',note:'Nota',views:'vistas',close:'Cerrar',login:'Entrar',register:'Registrarse',email:'Correo',password:'Contraseña',fullName:'Nombre',role:'Soy',jobSeeker:'Buscador',recruiterRole:'Reclutador',logout:'Salir',registerTitle:'Crear Cuenta',shareTitle:'Compartir',shareDesc:'Correo del reclutador.',cancel:'Cancelar',send:'Enviar',addExperience:'+ Añadir',addEducation:'+ Añadir',addSkill:'+ Añadir',saveSummary:'Guardar',recruiterOnly:'Solo reclutadores',photoLabel:'Foto (opcional)',photoHint:'JPG o PNG bajo 800 KB.',removePhoto:'Quitar Foto',showPhoto:'Mostrar foto',publishSettings:'Ajustes',passwordProtect:'Proteger con contraseña',setPassword:'Contraseña',socialTitle:'Redes',linkedin:'LinkedIn',github:'GitHub',twitter:'Twitter / X',saveSettings:'Guardar',settingsSaved:'Guardado',passwordRequired:'Protegido con contraseña.',enterPassword:'Contraseña',unlock:'Desbloquear',wrongPassword:'Incorrecta.'},
-  hi:{home:'होम',templates:'टेम्पलेट्स',dashboard:'डैशबोर्ड',inbox:'इनबॉक्स',myResumes:'मेरे रिज़्यूमे',newResume:'+ नया',heroBadge:'✦ मुफ्त',heroTitle:'मिनटों में रिज़्यूमे बनाएं',heroDesc:'26 थीम, 26 टेम्पलेट्स, PDF, QR।',browseTemplates:'देखें →',noResumes:'कोई रिज़्यूमे नहीं।',edit:'संपादित',preview:'देखें',publish:'प्रकाशित',makePrivate:'निजी',delete:'हटाएं',back:'← पीछे',next:'आगे →',finish:'✓ समाप्त',heading:'शीर्षक',work:'अनुभव',education:'शिक्षा',skills:'कौशल',summary:'सारांश',finalize:'अंतिम',downloadPdf:'📄 PDF',print:'🖨️ प्रिंट',customize:'🎨 अनुकूलित',analytics:'📊 विश्लेषण',qr:'📱 QR',share:'📤 साझा',chooseTemplate:'चुनें',previewLabel:'पूर्वावलोकन',sectionOrder:'क्रम',dragToReorder:'खींचें',fontLabel:'फ़ॉन्ट',colorLabel:'रंग',portfolioLink:'पोर्टफोलियो',totalViews:'कुल',last30:'30 दिन',last14:'14 दिन',inboxTitle:'इनबॉक्स',inboxEmpty:'खाली',sharedBy:'द्वारा',note:'नोट',views:'व्यूज़',close:'बंद',login:'लॉगिन',register:'रजिस्टर',email:'ईमेल',password:'पासवर्ड',fullName:'नाम',role:'मैं',jobSeeker:'नौकरी',recruiterRole:'रिक्रूटर',logout:'लॉग आउट',registerTitle:'खाता बनाएं',shareTitle:'साझा करें',shareDesc:'रिक्रूटर ईमेल।',cancel:'रद्द',send:'भेजें',addExperience:'+ जोड़ें',addEducation:'+ जोड़ें',addSkill:'+ जोड़ें',saveSummary:'सहेजें',recruiterOnly:'केवल रिक्रूटर',photoLabel:'फोटो (वैकल्पिक)',photoHint:'JPG/PNG 800KB से कम।',removePhoto:'हटाएं',showPhoto:'फोटो दिखाएं',publishSettings:'सेटिंग्स',passwordProtect:'पासवर्ड सुरक्षा',setPassword:'पासवर्ड',socialTitle:'सोशल',linkedin:'LinkedIn',github:'GitHub',twitter:'Twitter / X',saveSettings:'सहेजें',settingsSaved:'सहेजा गया',passwordRequired:'पासवर्ड आवश्यक।',enterPassword:'पासवर्ड',unlock:'अनलॉक',wrongPassword:'गलत पासवर्ड।'}
+  en:{home:'Home',templates:'Templates',dashboard:'Dashboard',inbox:'Recruiter Inbox',myResumes:'My Resumes',newResume:'+ New Resume',noResumes:'No resumes yet. Pick a template.',edit:'Edit',preview:'Preview',publish:'Publish',makePrivate:'Make Private',delete:'Delete',back:'← Back',next:'Next →',finish:'✓ Finish & Preview',heading:'Heading',work:'Work History',education:'Education',skills:'Skills',summary:'Summary',finalize:'Finalize',downloadPdf:'📄 Download PDF',print:'🖨️ Print',customize:'🎨 Customize',analytics:'📊 Analytics',qr:'📱 QR Code',share:'📤 Share with Recruiter',chooseTemplate:'Choose Template',previewLabel:'Preview',sectionOrder:'Section Order',dragToReorder:'Drag to reorder',fontLabel:'Font',colorLabel:'Accent Color',portfolioLink:'Portfolio Link (QR)',totalViews:'Total Views',last30:'Last 30 Days',last14:'Views (Last 14 Days)',inboxTitle:'Recruiter Inbox',inboxEmpty:'No resumes shared with you.',sharedBy:'Shared by',note:'Note',views:'views',close:'Close',login:'Login',register:'Register',email:'Email',password:'Password',fullName:'Full Name',role:'I am a',jobSeeker:'Job Seeker',recruiterRole:'Recruiter',logout:'Logout',registerTitle:'Create Account',shareTitle:'Share with Recruiter',shareDesc:'Enter recruiter email.',cancel:'Cancel',send:'Send',addExperience:'+ Add Experience',addEducation:'+ Add Education',addSkill:'+ Add',saveSummary:'Save Summary',recruiterOnly:'Recruiters only',photoLabel:'Profile Photo (optional)',photoHint:'Square images work best. JPG or PNG under 800 KB.',removePhoto:'Remove Photo',showPhoto:'Show photo on resume',publishSettings:'Publish Settings',passwordProtect:'Password protect this resume',setPassword:'Set Password',socialTitle:'Social Links',linkedin:'LinkedIn URL',github:'GitHub URL',twitter:'Twitter / X URL',passwordRequired:'This resume is password protected.',enterPassword:'Enter Password',unlock:'Unlock',wrongPassword:'Incorrect password.',watermark:'Add watermark on PDF',importFromTemplates:'📥 Import from Templates',importTitle:'Import from Templates',importSub:'Start with a pre-filled resume, then customize it as your own.',seasonal:'Seasonal',classicTemplates:'Classic Templates',seasonalTemplates:'Seasonal Templates',useThis:'Use this template',qrWithLogo:'QR with your initials'},
+  es:{home:'Inicio',templates:'Plantillas',dashboard:'Panel',inbox:'Bandeja',myResumes:'Mis Currículums',newResume:'+ Nuevo',noResumes:'Sin currículums.',edit:'Editar',preview:'Ver',publish:'Publicar',makePrivate:'Privado',delete:'Eliminar',back:'← Atrás',next:'Siguiente →',finish:'✓ Finalizar',heading:'Encabezado',work:'Experiencia',education:'Educación',skills:'Habilidades',summary:'Resumen',finalize:'Finalizar',downloadPdf:'📄 PDF',print:'🖨️ Imprimir',customize:'🎨 Personalizar',analytics:'📊 Estadísticas',qr:'📱 QR',share:'📤 Compartir',chooseTemplate:'Elegir',previewLabel:'Vista Previa',sectionOrder:'Orden',dragToReorder:'Arrastra',fontLabel:'Fuente',colorLabel:'Color',portfolioLink:'Portafolio',totalViews:'Vistas',last30:'30 Días',last14:'14 Días',inboxTitle:'Bandeja',inboxEmpty:'Vacía',sharedBy:'De',note:'Nota',views:'vistas',close:'Cerrar',login:'Entrar',register:'Registrarse',email:'Correo',password:'Contraseña',fullName:'Nombre',role:'Soy',jobSeeker:'Buscador',recruiterRole:'Reclutador',logout:'Salir',registerTitle:'Crear Cuenta',shareTitle:'Compartir',shareDesc:'Correo.',cancel:'Cancelar',send:'Enviar',addExperience:'+ Añadir',addEducation:'+ Añadir',addSkill:'+ Añadir',saveSummary:'Guardar',recruiterOnly:'Solo reclutadores',photoLabel:'Foto (opcional)',photoHint:'JPG o PNG < 800 KB.',removePhoto:'Quitar Foto',showPhoto:'Mostrar foto',publishSettings:'Ajustes',passwordProtect:'Proteger con contraseña',setPassword:'Contraseña',socialTitle:'Redes',linkedin:'LinkedIn',github:'GitHub',twitter:'Twitter / X',passwordRequired:'Protegido con contraseña.',enterPassword:'Contraseña',unlock:'Desbloquear',wrongPassword:'Incorrecta.',watermark:'Añadir marca de agua',importFromTemplates:'📥 Importar plantillas',importTitle:'Importar desde plantillas',importSub:'Empieza con un currículum pre-llenado.',seasonal:'Estacional',classicTemplates:'Clásicas',seasonalTemplates:'Estacionales',useThis:'Usar esta',qrWithLogo:'QR con iniciales'},
+  hi:{home:'होम',templates:'टेम्पलेट्स',dashboard:'डैशबोर्ड',inbox:'इनबॉक्स',myResumes:'मेरे रिज़्यूमे',newResume:'+ नया',noResumes:'कोई रिज़्यूमे नहीं।',edit:'संपादित',preview:'देखें',publish:'प्रकाशित',makePrivate:'निजी',delete:'हटाएं',back:'← पीछे',next:'आगे →',finish:'✓ समाप्त',heading:'शीर्षक',work:'अनुभव',education:'शिक्षा',skills:'कौशल',summary:'सारांश',finalize:'अंतिम',downloadPdf:'📄 PDF',print:'🖨️ प्रिंट',customize:'🎨 अनुकूलित',analytics:'📊 विश्लेषण',qr:'📱 QR',share:'📤 साझा',chooseTemplate:'चुनें',previewLabel:'पूर्वावलोकन',sectionOrder:'क्रम',dragToReorder:'खींचें',fontLabel:'फ़ॉन्ट',colorLabel:'रंग',portfolioLink:'पोर्टफोलियो',totalViews:'कुल',last30:'30 दिन',last14:'14 दिन',inboxTitle:'इनबॉक्स',inboxEmpty:'खाली',sharedBy:'द्वारा',note:'नोट',views:'व्यूज़',close:'बंद',login:'लॉगिन',register:'रजिस्टर',email:'ईमेल',password:'पासवर्ड',fullName:'नाम',role:'मैं',jobSeeker:'नौकरी',recruiterRole:'रिक्रूटर',logout:'लॉग आउट',registerTitle:'खाता बनाएं',shareTitle:'साझा करें',shareDesc:'रिक्रूटर ईमेल।',cancel:'रद्द',send:'भेजें',addExperience:'+ जोड़ें',addEducation:'+ जोड़ें',addSkill:'+ जोड़ें',saveSummary:'सहेजें',recruiterOnly:'केवल रिक्रूटर',photoLabel:'फोटो (वैकल्पिक)',photoHint:'JPG/PNG 800KB से कम।',removePhoto:'हटाएं',showPhoto:'फोटो दिखाएं',publishSettings:'सेटिंग्स',passwordProtect:'पासवर्ड सुरक्षा',setPassword:'पासवर्ड',socialTitle:'सोशल',linkedin:'LinkedIn',github:'GitHub',twitter:'Twitter / X',passwordRequired:'पासवर्ड आवश्यक।',enterPassword:'पासवर्ड',unlock:'अनलॉक',wrongPassword:'गलत।',watermark:'PDF पर वॉटरमार्क',importFromTemplates:'📥 टेम्पलेट से आयात',importTitle:'टेम्पलेट से आयात करें',importSub:'पहले से भरा हुआ रिज़्यूमे चुनें।',seasonal:'मौसमी',classicTemplates:'क्लासिक',seasonalTemplates:'मौसमी टेम्पलेट्स',useThis:'यह उपयोग करें',qrWithLogo:'आद्याक्षर के साथ QR'}
 };
 function t(k){return (TR[state.language]&&TR[state.language][k])||TR.en[k]||k;}
 
@@ -589,32 +661,39 @@ const DARK_THEMES=[
   {id:'emerald',name:'Emerald',color:'#064e3b',accent:'#34d399'}
 ];
 const TEMPLATES=[
-  {id:'classic',name:'Classic',desc:'Traditional & professional',badge:'Popular'},
-  {id:'modern',name:'Modern',desc:'Bold two-column sidebar',badge:''},
-  {id:'minimal',name:'Minimal',desc:'Clean, ultra-simple',badge:''},
-  {id:'creative',name:'Creative',desc:'Stand out with color',badge:''},
-  {id:'elegant',name:'Elegant',desc:'Refined & timeless',badge:''},
-  {id:'bold',name:'Bold',desc:'Strong statement',badge:''},
-  {id:'compact',name:'Compact',desc:'Fit more on one page',badge:''},
-  {id:'professional',name:'Professional',desc:'Corporate-ready',badge:'Popular'},
-  {id:'two-col',name:'Two Column',desc:'Sidebar + main content',badge:''},
-  {id:'timeline',name:'Timeline',desc:'Visual career progression',badge:''},
-  {id:'executive',name:'Executive',desc:'Formal & authoritative',badge:''},
-  {id:'designer',name:'Designer',desc:'Creative portfolio style',badge:''},
-  {id:'tech',name:'Tech',desc:'Developer-focused',badge:''},
-  {id:'academic',name:'Academic',desc:'CV with publications',badge:''},
-  {id:'corporate',name:'Corporate',desc:'Blue header executive',badge:''},
-  {id:'gradient',name:'Gradient',desc:'Warm two-column',badge:''},
-  {id:'magazine',name:'Magazine',desc:'Editorial black & gold',badge:''},
-  {id:'split',name:'Split',desc:'Dark & light halves',badge:''},
-  {id:'metro',name:'Metro',desc:'Modern tile grid',badge:''},
-  {id:'spotlight',name:'Spotlight',desc:'Centered & elegant',badge:''},
-  {id:'diamond',name:'Diamond',desc:'Geometric blue header',badge:'New'},
-  {id:'aurora',name:'Aurora',desc:'Gradient text elegance',badge:'New'},
-  {id:'nordic',name:'Nordic',desc:'Scandinavian minimal',badge:'New'},
-  {id:'futuristic',name:'Futuristic',desc:'Dark cyber aesthetic',badge:'New'},
-  {id:'pastel',name:'Pastel',desc:'Soft warm tones',badge:'New'},
-  {id:'mono',name:'Mono',desc:'Black & white editorial',badge:'New'}
+  {id:'classic',name:'Classic',desc:'Traditional & professional',badge:'Popular',cat:'classic'},
+  {id:'modern',name:'Modern',desc:'Bold two-column sidebar',badge:'',cat:'classic'},
+  {id:'minimal',name:'Minimal',desc:'Clean, ultra-simple',badge:'',cat:'classic'},
+  {id:'creative',name:'Creative',desc:'Stand out with color',badge:'',cat:'classic'},
+  {id:'elegant',name:'Elegant',desc:'Refined & timeless',badge:'',cat:'classic'},
+  {id:'bold',name:'Bold',desc:'Strong statement',badge:'',cat:'classic'},
+  {id:'compact',name:'Compact',desc:'Fit more on one page',badge:'',cat:'classic'},
+  {id:'professional',name:'Professional',desc:'Corporate-ready',badge:'Popular',cat:'classic'},
+  {id:'two-col',name:'Two Column',desc:'Sidebar + main content',badge:'',cat:'classic'},
+  {id:'timeline',name:'Timeline',desc:'Visual career progression',badge:'',cat:'classic'},
+  {id:'executive',name:'Executive',desc:'Formal & authoritative',badge:'',cat:'classic'},
+  {id:'designer',name:'Designer',desc:'Creative portfolio style',badge:'',cat:'classic'},
+  {id:'tech',name:'Tech',desc:'Developer-focused',badge:'',cat:'classic'},
+  {id:'academic',name:'Academic',desc:'CV with publications',badge:'',cat:'classic'},
+  {id:'corporate',name:'Corporate',desc:'Blue header executive',badge:'',cat:'classic'},
+  {id:'gradient',name:'Gradient',desc:'Warm two-column',badge:'',cat:'classic'},
+  {id:'magazine',name:'Magazine',desc:'Editorial black & gold',badge:'',cat:'classic'},
+  {id:'split',name:'Split',desc:'Dark & light halves',badge:'',cat:'classic'},
+  {id:'metro',name:'Metro',desc:'Modern tile grid',badge:'',cat:'classic'},
+  {id:'spotlight',name:'Spotlight',desc:'Centered & elegant',badge:'',cat:'classic'},
+  {id:'diamond',name:'Diamond',desc:'Geometric blue header',badge:'New',cat:'classic'},
+  {id:'aurora',name:'Aurora',desc:'Gradient text elegance',badge:'New',cat:'classic'},
+  {id:'nordic',name:'Nordic',desc:'Scandinavian minimal',badge:'New',cat:'classic'},
+  {id:'futuristic',name:'Futuristic',desc:'Dark cyber aesthetic',badge:'New',cat:'classic'},
+  {id:'pastel',name:'Pastel',desc:'Soft warm tones',badge:'New',cat:'classic'},
+  {id:'mono',name:'Mono',desc:'Black & white editorial',badge:'New',cat:'classic'},
+  /* SEASONAL */
+  {id:'halloween',name:'Halloween',desc:'Spooky orange & black',badge:'🎃 Seasonal',cat:'seasonal'},
+  {id:'holiday',name:'Holiday',desc:'Festive red & green',badge:'❄️ Seasonal',cat:'seasonal'},
+  {id:'spring',name:'Spring',desc:'Blossom pinks & greens',badge:'🌸 Seasonal',cat:'seasonal'},
+  {id:'summer',name:'Summer',desc:'Bright sunlit vibes',badge:'☀️ Seasonal',cat:'seasonal'},
+  {id:'autumn',name:'Autumn',desc:'Warm autumn leaves',badge:'🍂 Seasonal',cat:'seasonal'},
+  {id:'winter',name:'Winter',desc:'Frosty ice blues',badge:'❄️ Seasonal',cat:'seasonal'}
 ];
 const FONTS=[
   {id:'inter',label:'Inter'},{id:'playfair',label:'Playfair'},{id:'roboto',label:'Roboto'},
@@ -626,6 +705,102 @@ const WIZARD_STEPS=[
   {key:'heading',label:'heading',icon:'1'},{key:'work',label:'work',icon:'2'},
   {key:'education',label:'education',icon:'3'},{key:'skills',label:'skills',icon:'4'},
   {key:'summary',label:'summary',icon:'5'},{key:'finalize',label:'finalize',icon:'6'}
+];
+
+/* ============================================================
+   SAMPLE RESUMES for Import from Templates
+   ============================================================ */
+const SAMPLE_RESUMES=[
+  {
+    id:'backend-dev',label:'Backend Developer',emoji:'⚙️',tag:'Engineering',template:'tech',font:'inter',color:'#0891b2',
+    data:{
+      full_name:'Alex Chen',job_title:'Senior Backend Developer',
+      email:'alex.chen@email.com',phone:'+1 555 123 4567',location:'San Francisco, CA',
+      website:'alexchen.dev',linkedin:'linkedin.com/in/alexchen',github:'github.com/alexchen',
+      summary:'Backend engineer with 6+ years building scalable distributed systems. Expertise in Node.js, PostgreSQL, and Kubernetes. Led teams shipping APIs serving 10M+ requests/day.',
+      experiences:[
+        {id:'e1',company:'Stripe',role:'Senior Backend Engineer',location:'San Francisco',startDate:'Jan 2022',endDate:'Present',description:'• Led migration of payment processing to microservices (Node.js + gRPC)\n• Reduced p99 latency by 42% through query optimization\n• Mentored 4 junior engineers, 2 promoted to mid-level'},
+        {id:'e2',company:'Airbnb',role:'Backend Engineer',location:'Remote',startDate:'Jun 2019',endDate:'Dec 2021',description:'• Built real-time pricing service handling 50K req/s\n• Designed PostgreSQL sharding strategy for 2TB user data\n• Owned on-call rotation for payments team'}
+      ],
+      educations:[{id:'ed1',institution:'UC Berkeley',degree:'B.S.',fieldOfStudy:'Computer Science',startYear:'2015',endYear:'2019',grade:'3.9'}],
+      skills:[{id:'s1',name:'Node.js',level:5},{id:'s2',name:'PostgreSQL',level:5},{id:'s3',name:'Kubernetes',level:4},{id:'s4',name:'Redis',level:4},{id:'s5',name:'gRPC',level:4},{id:'s6',name:'AWS',level:4}]
+    }
+  },
+  {
+    id:'frontend-dev',label:'Frontend Developer',emoji:'🎨',tag:'Engineering',template:'designer',font:'inter',color:'#7c3aed',
+    data:{
+      full_name:'Maya Patel',job_title:'Senior Frontend Engineer',
+      email:'maya.patel@email.com',phone:'+1 555 987 6543',location:'New York, NY',
+      website:'mayapatel.design',linkedin:'linkedin.com/in/mayapatel',github:'github.com/mayapatel',
+      summary:'Frontend engineer with 5 years crafting accessible, high-performance web apps. React, TypeScript, and design-systems specialist.',
+      experiences:[
+        {id:'e1',company:'Vercel',role:'Senior Frontend Engineer',location:'Remote',startDate:'Mar 2022',endDate:'Present',description:'• Led redesign of dashboard used by 500K+ devs\n• Cut First Contentful Paint by 60% via code-splitting\n• Built accessible component library (WCAG AAA)'},
+        {id:'e2',company:'Figma',role:'Frontend Engineer',location:'San Francisco',startDate:'Jul 2019',endDate:'Feb 2022',description:'• Shipped plugin marketplace frontend\n• Improved Lighthouse score from 68 to 96\n• Contributed to open-source design system'}
+      ],
+      educations:[{id:'ed1',institution:'NYU',degree:'B.F.A.',fieldOfStudy:'Design & Technology',startYear:'2015',endYear:'2019',grade:'3.8'}],
+      skills:[{id:'s1',name:'React',level:5},{id:'s2',name:'TypeScript',level:5},{id:'s3',name:'CSS',level:5},{id:'s4',name:'Next.js',level:4},{id:'s5',name:'Tailwind',level:4}]
+    }
+  },
+  {
+    id:'product-designer',label:'Product Designer',emoji:'✏️',tag:'Design',template:'designer',font:'playfair',color:'#be185d',
+    data:{
+      full_name:'Sam Rivera',job_title:'Senior Product Designer',
+      email:'sam.rivera@email.com',phone:'+1 555 555 1234',location:'Austin, TX',
+      website:'samrivera.studio',linkedin:'linkedin.com/in/samrivera',
+      summary:'Product designer with 7 years designing consumer and enterprise apps. Systems thinker with a bias for measurable outcomes.',
+      experiences:[
+        {id:'e1',company:'Linear',role:'Senior Product Designer',location:'Remote',startDate:'Aug 2021',endDate:'Present',description:'• Owned the redesign of Issues, shipped to 100% of users\n• Built the design system used by 12 designers\n• Ran quarterly user research with 40+ customers'},
+        {id:'e2',company:'Notion',role:'Product Designer',location:'San Francisco',startDate:'Feb 2018',endDate:'Jul 2021',description:'• Designed core Notion editor experience\n• Increased onboarding completion by 25%'}
+      ],
+      educations:[{id:'ed1',institution:'RISD',degree:'B.F.A.',fieldOfStudy:'Graphic Design',startYear:'2013',endYear:'2017',grade:''}],
+      skills:[{id:'s1',name:'Figma',level:5},{id:'s2',name:'Prototyping',level:5},{id:'s3',name:'User Research',level:4},{id:'s4',name:'Design Systems',level:5}]
+    }
+  },
+  {
+    id:'data-analyst',label:'Data Analyst',emoji:'📊',tag:'Data',template:'executive',font:'lora',color:'#059669',
+    data:{
+      full_name:'Priya Sharma',job_title:'Senior Data Analyst',
+      email:'priya.sharma@email.com',phone:'+1 555 246 8101',location:'Seattle, WA',
+      linkedin:'linkedin.com/in/priyasharma',
+      summary:'Data analyst with 5 years turning raw data into decisions. SQL, Python, and dashboarding expert. Former consultant.',
+      experiences:[
+        {id:'e1',company:'Amazon',role:'Senior Data Analyst',location:'Seattle',startDate:'Jan 2022',endDate:'Present',description:'• Built executive dashboard tracking $2B in revenue\n• Identified $8M cost-saving opportunity via cohort analysis\n• Automated reporting, saving 30 analyst-hours/week'},
+        {id:'e2',company:'Deloitte',role:'Data Analyst',location:'New York',startDate:'Aug 2019',endDate:'Dec 2021',description:'• Delivered analytics for 8 Fortune 500 clients\n• Built ML churn-prediction model with 85% accuracy'}
+      ],
+      educations:[{id:'ed1',institution:'University of Washington',degree:'M.S.',fieldOfStudy:'Statistics',startYear:'2017',endYear:'2019',grade:'3.9'}],
+      skills:[{id:'s1',name:'SQL',level:5},{id:'s2',name:'Python',level:5},{id:'s3',name:'Tableau',level:4},{id:'s4',name:'Excel',level:5},{id:'s5',name:'A/B Testing',level:4}]
+    }
+  },
+  {
+    id:'product-manager',label:'Product Manager',emoji:'🚀',tag:'Product',template:'corporate',font:'montserrat',color:'#1e40af',
+    data:{
+      full_name:'Jordan Kim',job_title:'Senior Product Manager',
+      email:'jordan.kim@email.com',phone:'+1 555 789 0123',location:'Los Angeles, CA',
+      linkedin:'linkedin.com/in/jordankim',
+      summary:'Product manager with 8 years shipping B2B SaaS. Engineering background. Comfortable owning P&L from ideation to launch.',
+      experiences:[
+        {id:'e1',company:'Salesforce',role:'Senior Product Manager',location:'Remote',startDate:'Apr 2020',endDate:'Present',description:'• Owned the CRM Analytics product line ($40M ARR)\n• Grew user base from 30K to 120K in 2 years\n• Led cross-functional team of 15 (eng, design, data)'},
+        {id:'e2',company:'HubSpot',role:'Product Manager',location:'Boston',startDate:'Jun 2016',endDate:'Mar 2020',description:'• Launched marketing automation suite\n• Ran customer discovery interviews (200+)'}
+      ],
+      educations:[{id:'ed1',institution:'MIT Sloan',degree:'MBA',fieldOfStudy:'Product Management',startYear:'2014',endYear:'2016',grade:''},{id:'ed2',institution:'Georgia Tech',degree:'B.S.',fieldOfStudy:'Computer Engineering',startYear:'2010',endYear:'2014',grade:'3.7'}],
+      skills:[{id:'s1',name:'Product Strategy',level:5},{id:'s2',name:'Roadmapping',level:5},{id:'s3',name:'SQL',level:4},{id:'s4',name:'A/B Testing',level:4},{id:'s5',name:'Stakeholder Mgmt',level:5}]
+    }
+  },
+  {
+    id:'teacher',label:'Teacher',emoji:'📚',tag:'Education',template:'elegant',font:'merriweather',color:'#b45309',
+    data:{
+      full_name:'Dr. Emily Wright',job_title:'High School Mathematics Teacher',
+      email:'emily.wright@email.com',phone:'+1 555 321 4567',location:'Portland, OR',
+      linkedin:'linkedin.com/in/emilywright',
+      summary:'Educator with 10 years teaching mathematics to grades 9-12. Committed to inclusive teaching and measurable student growth.',
+      experiences:[
+        {id:'e1',company:'Lincoln High School',role:'Mathematics Teacher',location:'Portland',startDate:'Aug 2018',endDate:'Present',description:'• Taught Algebra II, Pre-Calculus, AP Calculus AB\n• AP Calculus pass rate improved from 62% to 89%\n• Founded after-school math club with 40+ members'},
+        {id:'e2',company:'Roosevelt Middle School',role:'Math Teacher',location:'Portland',startDate:'Aug 2014',endDate:'Jul 2018',description:'• Designed project-based learning curriculum\n• Coached 3 winning Math Olympiad teams'}
+      ],
+      educations:[{id:'ed1',institution:'University of Oregon',degree:'Ph.D.',fieldOfStudy:'Mathematics Education',startYear:'2010',endYear:'2014',grade:''},{id:'ed2',institution:'Oregon State',degree:'B.S.',fieldOfStudy:'Mathematics',startYear:'2006',endYear:'2010',grade:'3.9'}],
+      skills:[{id:'s1',name:'Curriculum Design',level:5},{id:'s2',name:'Classroom Mgmt',level:5},{id:'s3',name:'AP Calculus',level:5},{id:'s4',name:'Data-Driven Teaching',level:4}]
+    }
+  }
 ];
 
 /* ============================================================
@@ -649,7 +824,9 @@ function saveUser(){localStorage.setItem('user',JSON.stringify(state.user));}
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function generateId(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
 function $(id){return document.getElementById(id);}
-function getCurrentResume(){const r=state.resumes.find(x=>x.id===state.currentResumeId);if(r){if(r.photo===undefined)r.photo='';if(r.linkedin===undefined)r.linkedin='';if(r.github===undefined)r.github='';if(r.twitter===undefined)r.twitter='';if(r.password===undefined)r.password='';}return r;}
+function getCurrentResume(){const r=state.resumes.find(x=>x.id===state.currentResumeId);if(r){
+  if(r.photo===undefined)r.photo='';if(r.linkedin===undefined)r.linkedin='';if(r.github===undefined)r.github='';if(r.twitter===undefined)r.twitter='';if(r.password===undefined)r.password='';if(r.watermark===undefined)r.watermark=false;}
+  return r;}
 
 /* ============================================================
    LANGUAGE
@@ -727,11 +904,14 @@ function renderPage(page,params){
 function renderLanding(){
   return `<div class="page">
     <section class="hero stagger">
-      <div class="badge">${t('heroBadge')}</div>
-      <h1>${t('heroTitle').replace('Minutes','<span>Minutes</span>')}</h1>
-      <p>${t('heroDesc')}</p>
-      <div class="cta-group"><button class="lg" onclick="navigate('templates')">${t('browseTemplates')}</button><button class="ghost lg" onclick="navigate('dashboard')">${t('myResumes')}</button></div>
-      <p class="trust">✦ No sign-up required · 100% free</p>
+      <div class="badge">✦ Free Resume Builder</div>
+      <h1>Build a Professional Resume in <span>Minutes</span></h1>
+      <p>32 templates (26 classic + 6 seasonal), 19 themes, PDF export, QR codes, watermark, analytics, and more.</p>
+      <div class="cta-group">
+        <button class="lg" onclick="startBlankResume()">Make my resume →</button>
+        <button class="ghost lg" onclick="navigate('templates')">Browse templates</button>
+      </div>
+      <p class="trust">✦ No sign-up required · 100% free · Works in your browser</p>
     </section>
     <section class="features">
       <h2 class="stagger">Everything You Need</h2>
@@ -739,38 +919,130 @@ function renderLanding(){
       <div class="feature-grid stagger">
         <div class="feature-card"><div class="icon">📝</div><h3>Guided Wizard</h3><p>Step-by-step process for every resume section.</p></div>
         <div class="feature-card"><div class="icon">🎨</div><h3>19 Themes</h3><p>Light and dark variants, switchable instantly.</p></div>
-        <div class="feature-card"><div class="icon">📄</div><h3>26 Templates</h3><p>Classic, Modern, Designer, Nordic, Futuristic and more.</p></div>
+        <div class="feature-card"><div class="icon">📄</div><h3>32 Templates</h3><p>26 classic + 6 seasonal (Halloween, Holiday, Spring, Summer, Autumn, Winter).</p></div>
+        <div class="feature-card"><div class="icon">📥</div><h3>Import from Templates</h3><p>Start from pre-filled sample resumes for common roles.</p></div>
         <div class="feature-card"><div class="icon">📸</div><h3>Photo Upload</h3><p>Add a professional profile photo with auto-crop.</p></div>
         <div class="feature-card"><div class="icon">📊</div><h3>Analytics & Sparklines</h3><p>See every view with a mini chart on your dashboard.</p></div>
         <div class="feature-card"><div class="icon">🔒</div><h3>Password Publish</h3><p>Protect public resumes with a password.</p></div>
-        <div class="feature-card"><div class="icon">📱</div><h3>QR Code</h3><p>Share your resume with a scannable QR code.</p></div>
+        <div class="feature-card"><div class="icon">📱</div><h3>QR with Logo</h3><p>Share your resume with a branded QR code.</p></div>
+        <div class="feature-card"><div class="icon">💧</div><h3>PDF Watermark</h3><p>Optional watermark on exported PDFs.</p></div>
         <div class="feature-card"><div class="icon">🔗</div><h3>Social Icons</h3><p>LinkedIn, GitHub and Twitter links with icons.</p></div>
-        <div class="feature-card"><div class="icon">🌙</div><h3>Auto Dark Mode</h3><p>Follows your system preference by default.</p></div>
         <div class="feature-card"><div class="icon">🖋️</div><h3>Fonts & Colors</h3><p>6 fonts and 12 accent colors.</p></div>
         <div class="feature-card"><div class="icon">🔀</div><h3>Reorder Sections</h3><p>Drag and drop to reorder.</p></div>
-        <div class="feature-card"><div class="icon">🌍</div><h3>Multi-language</h3><p>English, Spanish, and Hindi.</p></div>
       </div>
     </section>
     <section class="cta-section">
       <h2>Ready to Build Your Resume?</h2>
       <p>It takes less than 5 minutes.</p>
-      <button class="lg" onclick="navigate('templates')">Get Started — It's Free</button>
+      <button class="lg" onclick="startBlankResume()">Get Started — It's Free</button>
     </section>
   </div>`;
+}
+
+function startBlankResume(){
+  const id=generateId();
+  const nr={id,title:'Untitled Resume',template:'classic',isPublic:false,full_name:'',job_title:'',email:'',phone:'',location:'',website:'',summary:'',portfolio_url:'',photo:'',linkedin:'',github:'',twitter:'',password:'',watermark:false,font:'inter',accent_color:'',section_order:JSON.stringify(['summary','experience','education','skills']),experiences:[],educations:[],skills:[],projects:[],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
+  state.resumes.unshift(nr);saveResumes();
+  state.currentResumeId=id;state.wizardStep=0;navigate('wizard',{id});
 }
 
 /* ============================================================
    TEMPLATES
    ============================================================ */
 function renderTemplatesPage(){
+  const classic=TEMPLATES.filter(t=>t.cat==='classic');
+  const seasonal=TEMPLATES.filter(t=>t.cat==='seasonal');
   return `<div class="page"><div class="templates-page">
-    <div class="header-block stagger"><h1>Choose a Template</h1><p>26 professionally designed templates. All ATS-friendly.</p></div>
-    <div class="templates-grid stagger">${TEMPLATES.map(tp=>`<div class="tpl-card" onclick="useTemplate('${tp.id}')"><div class="thumb-wrap">${renderTemplatePreview(tp.id)}</div><div class="thumb-label"><h3>${tp.name}</h3>${tp.badge?`<span class="tpl-badge">${tp.badge}</span>`:''}</div><p>${tp.desc}</p></div>`).join('')}</div>
+    <div class="header-block stagger">
+      <h1>Choose a Template</h1>
+      <p>32 professionally designed templates. All ATS-friendly.</p>
+      <div class="templates-actions">
+        <button class="secondary" onclick="showImportModal()">📥 Import from Templates</button>
+        <button onclick="startBlankResume()">+ Start blank</button>
+      </div>
+    </div>
+
+    <div class="templates-section-title stagger">Classic Templates · 26</div>
+    <div class="templates-grid stagger">
+      ${classic.map(tp=>`
+        <div class="tpl-card" onclick="useTemplate('${tp.id}')">
+          <div class="thumb-wrap">${renderTemplatePreview(tp.id)}</div>
+          <div class="thumb-label">
+            <h3>${tp.name}</h3>
+            ${tp.badge?`<span class="tpl-badge">${tp.badge}</span>`:''}
+          </div>
+          <p>${tp.desc}</p>
+        </div>`).join('')}
+    </div>
+
+    <div class="templates-section-title stagger">Seasonal Templates · 6</div>
+    <div class="templates-grid stagger">
+      ${seasonal.map(tp=>`
+        <div class="tpl-card" onclick="useTemplate('${tp.id}')">
+          <div class="thumb-wrap">${renderTemplatePreview(tp.id)}</div>
+          <div class="thumb-label">
+            <h3>${tp.name}</h3>
+            ${tp.badge?`<span class="tpl-badge seasonal">${tp.badge}</span>`:''}
+          </div>
+          <p>${tp.desc}</p>
+        </div>`).join('')}
+    </div>
   </div></div>`;
 }
+
+/* ============================================================
+   IMPORT FROM TEMPLATES MODAL
+   ============================================================ */
+function showImportModal(){
+  openModal(`
+    <h3>${t('importTitle')}</h3>
+    <p class="modal-sub">${t('importSub')}</p>
+    <div class="sample-grid">
+      ${SAMPLE_RESUMES.map(s=>`
+        <div class="sample-card" onclick="importSampleResume('${s.id}')">
+          <div class="sample-emoji">${s.emoji}</div>
+          <div class="sample-tag">${s.tag}</div>
+          <h4>${s.label}</h4>
+          <p>Pre-filled with realistic experience, skills, and education.</p>
+        </div>`).join('')}
+    </div>
+    <div class="mt-3"><button class="secondary" onclick="closeModal()">${t('cancel')}</button></div>
+  `);
+}
+
+function importSampleResume(sampleId){
+  const sample=SAMPLE_RESUMES.find(s=>s.id===sampleId);
+  if(!sample)return;
+  const id=generateId();
+  const d=sample.data;
+  const nr={
+    id,
+    title:sample.label+' Resume',
+    template:sample.template,
+    isPublic:false,
+    full_name:d.full_name||'',job_title:d.job_title||'',
+    email:d.email||'',phone:d.phone||'',location:d.location||'',
+    website:d.website||'',portfolio_url:'',photo:'',
+    linkedin:d.linkedin||'',github:d.github||'',twitter:d.twitter||'',
+    password:'',watermark:false,
+    font:sample.font||'inter',accent_color:sample.color||'',
+    section_order:JSON.stringify(['summary','experience','education','skills']),
+    summary:d.summary||'',
+    experiences:(d.experiences||[]).map(e=>({...e,id:generateId()})),
+    educations:(d.educations||[]).map(e=>({...e,id:generateId()})),
+    skills:(d.skills||[]).map(e=>({...e,id:generateId()})),
+    projects:[],
+    createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()
+  };
+  state.resumes.unshift(nr);saveResumes();
+  state.currentResumeId=id;state.wizardStep=0;
+  closeModal();
+  navigate('wizard',{id});
+}
+
 function useTemplate(tplId){
   const id=generateId();
-  const nr={id,title:'Untitled Resume',template:tplId,isPublic:false,full_name:'',job_title:'',email:'',phone:'',location:'',website:'',summary:'',portfolio_url:'',photo:'',linkedin:'',github:'',twitter:'',password:'',font:'inter',accent_color:'',section_order:JSON.stringify(['summary','experience','education','skills']),experiences:[],educations:[],skills:[],projects:[],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
+  const nr={id,title:'Untitled Resume',template:tplId,isPublic:false,full_name:'',job_title:'',email:'',phone:'',location:'',website:'',summary:'',portfolio_url:'',photo:'',linkedin:'',github:'',twitter:'',password:'',watermark:false,font:'inter',accent_color:'',section_order:JSON.stringify(['summary','experience','education','skills']),experiences:[],educations:[],skills:[],projects:[],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
   state.resumes.unshift(nr);saveResumes();
   state.currentResumeId=id;state.wizardStep=0;navigate('wizard',{id});
 }
@@ -787,10 +1059,11 @@ function renderDashboard(){
       <div><h2>${t('myResumes')}</h2><p class="muted">${resumes.length} resume${resumes.length!==1?'s':''} saved</p></div>
       <div style="display:flex;gap:8px;">
         ${!state.user?`<button class="secondary" onclick="navigate('auth')">${t('login')}</button>`:`<button class="secondary" onclick="logout()">${t('logout')}</button>`}
+        <button class="secondary" onclick="showImportModal()">📥 Import</button>
         <button onclick="navigate('templates')">${t('newResume')}</button>
       </div>
     </div>
-    <div class="resume-list stagger">${resumes.length===0?`<div class="empty-state"><div style="font-size:2.4rem;margin-bottom:12px;">📄</div><h3>${t('noResumes')}</h3><br><button onclick="navigate('templates')">${t('browseTemplates')}</button></div>`:resumes.map(r=>renderResumeItem(r)).join('')}</div>
+    <div class="resume-list stagger">${resumes.length===0?`<div class="empty-state"><div style="font-size:2.4rem;margin-bottom:12px;">📄</div><h3>${t('noResumes')}</h3><br><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;"><button class="secondary" onclick="showImportModal()">📥 Import from Templates</button><button onclick="navigate('templates')">${t('browseTemplates')}</button></div></div>`:resumes.map(r=>renderResumeItem(r)).join('')}</div>
   </div></div>`;
 }
 function renderResumeItem(r){
@@ -923,7 +1196,6 @@ function goToStep(i){saveCurrentStep();state.wizardStep=i;navigate('wizard',{id:
 function nextStep(){saveCurrentStep();if(state.wizardStep<WIZARD_STEPS.length-1){state.wizardStep++;navigate('wizard',{id:state.currentResumeId});}else navigate('preview',{id:state.currentResumeId});}
 function prevStep(){saveCurrentStep();if(state.wizardStep>0){state.wizardStep--;navigate('wizard',{id:state.currentResumeId});}}
 
-/* ---------- Step 1: Heading with photo + socials ---------- */
 function stepHeading(r){
   const f=(id,label,ph,type='text')=>`<div><label>${label}</label><input id="h-${id}" type="${type}" value="${esc(r[id]||'')}" placeholder="${ph}" oninput="debouncedHeading()"></div>`;
   return `<h2>${t('heading')}</h2>
@@ -996,7 +1268,6 @@ function removePhoto(){
   r.photo='';r.updatedAt=new Date().toISOString();saveResumes();navigate('wizard',{id:r.id});
 }
 
-/* ---------- Step 2: Work ---------- */
 function stepWork(r){
   const items=r.experiences||[];
   return `<h2>${t('work')}</h2>
@@ -1017,7 +1288,6 @@ function addExperience(){
 }
 function delExperience(id){const r=getCurrentResume();if(!r)return;r.experiences=r.experiences.filter(x=>x.id!==id);r.updatedAt=new Date().toISOString();saveResumes();navigate('wizard',{id:r.id});}
 
-/* ---------- Step 3: Education ---------- */
 function stepEducation(r){
   const items=r.educations||[];
   return `<h2>${t('education')}</h2>
@@ -1037,7 +1307,6 @@ function addEducation(){
 }
 function delEducation(id){const r=getCurrentResume();if(!r)return;r.educations=r.educations.filter(x=>x.id!==id);r.updatedAt=new Date().toISOString();saveResumes();navigate('wizard',{id:r.id});}
 
-/* ---------- Step 4: Skills ---------- */
 function stepSkills(r){
   const items=r.skills||[];
   return `<h2>${t('skills')}</h2>
@@ -1053,7 +1322,6 @@ function stepSkills(r){
 function addSkill(){const r=getCurrentResume();if(!r)return;r.skills=r.skills||[];r.skills.push({id:generateId(),name:$('s-name').value,level:Number($('s-level').value)||3});r.updatedAt=new Date().toISOString();saveResumes();navigate('wizard',{id:r.id});}
 function delSkill(id){const r=getCurrentResume();if(!r)return;r.skills=r.skills.filter(x=>x.id!==id);r.updatedAt=new Date().toISOString();saveResumes();navigate('wizard',{id:r.id});}
 
-/* ---------- Step 5: Summary ---------- */
 function stepSummary(r){
   return `<h2>${t('summary')}</h2><p class="step-desc">A short professional summary.</p>
   <textarea id="s-summary" rows="7" oninput="debouncedSummary()" placeholder="Motivated software developer...">${esc(r.summary||'')}</textarea>`;
@@ -1061,7 +1329,6 @@ function stepSummary(r){
 let summaryTimer;
 function debouncedSummary(){clearTimeout(summaryTimer);summaryTimer=setTimeout(()=>{const r=getCurrentResume();if(!r)return;const el=$('s-summary');if(!el)return;r.summary=el.value;r.updatedAt=new Date().toISOString();saveResumes();updateProgressRing();},500);}
 
-/* ---------- Step 6: Finalize ---------- */
 function stepFinalize(r){
   const order=safeOrder(r.section_order);
   return `<h2>${t('finalize')}</h2><p class="step-desc">Customize, reorder, and export.</p>
@@ -1079,8 +1346,12 @@ function stepFinalize(r){
   <label class="toggle"><input type="checkbox" ${r.password?'checked':''} onchange="togglePasswordProtect(this.checked)"><span>${t('passwordProtect')}</span></label>
   ${r.password?`<div class="mt-2"><label>${t('setPassword')}</label><input type="text" value="${esc(r.password)}" onchange="setResumePassword(this.value)"></div>`:''}
   <label class="toggle mt-2"><input type="checkbox" ${r.photo?'checked':''} onchange="togglePhotoVisibility(this.checked)"><span>${t('showPhoto')}</span></label>
+  <label class="toggle mt-2"><input type="checkbox" ${r.watermark?'checked':''} onchange="toggleWatermark(this.checked)"><span>💧 ${t('watermark')}</span></label>
   <h3 style="font-size:1rem;margin:28px 0 10px;">${t('previewLabel')}</h3>
-  <div class="resume-preview-wrap font-${r.font||'inter'}" id="resume-preview">${buildResumeHTML(r)}</div>
+  <div class="resume-preview-wrap font-${r.font||'inter'} ${r.watermark?'has-watermark':''}" id="resume-preview">
+    ${r.watermark?'<div class="watermark-overlay"></div>':''}
+    ${buildResumeHTML(r)}
+  </div>
   <div class="mt-3" style="display:flex;gap:12px;flex-wrap:wrap;">
     <button onclick="exportPDF()">${t('downloadPdf')}</button>
     <button class="secondary" onclick="printResume()">${t('print')}</button>
@@ -1089,6 +1360,11 @@ function stepFinalize(r){
     <button class="secondary" onclick="showAnalytics('${r.id}')">${t('analytics')}</button>
     <button class="secondary" onclick="togglePublicFromWizard()">${r.isPublic?'🔒 '+t('makePrivate'):'🌐 '+t('publish')}</button>
   </div>`;
+}
+function toggleWatermark(on){
+  const r=getCurrentResume();if(!r)return;
+  r.watermark=!!on;r.updatedAt=new Date().toISOString();saveResumes();
+  navigate('wizard',{id:r.id});
 }
 function togglePasswordProtect(on){
   const r=getCurrentResume();if(!r)return;
@@ -1127,17 +1403,14 @@ function saveSectionOrder(){
   const r=getCurrentResume();if(!r)return;
   const order=[...document.querySelectorAll('#dnd-list .dnd-item')].map(i=>i.dataset.key);
   r.section_order=JSON.stringify(order);r.updatedAt=new Date().toISOString();saveResumes();
-  const prev=$('resume-preview');if(prev)prev.innerHTML=buildResumeHTML(r);
+  const prev=$('resume-preview');if(prev)prev.innerHTML=(r.watermark?'<div class="watermark-overlay"></div>':'')+buildResumeHTML(r);
 }
 function selectTemplate(id){const r=getCurrentResume();if(!r)return;r.template=id;r.updatedAt=new Date().toISOString();saveResumes();navigate('wizard',{id:r.id});}
 function selectFont(id){const r=getCurrentResume();if(!r)return;r.font=id;r.updatedAt=new Date().toISOString();saveResumes();const p=$('resume-preview');if(p){FONTS.forEach(f=>p.classList.remove('font-'+f.id));p.classList.add('font-'+id);}document.querySelectorAll('.font-option').forEach(el=>el.classList.toggle('active',el.dataset.font===id));}
-function selectColor(color){const r=getCurrentResume();if(!r)return;r.accent_color=color;r.updatedAt=new Date().toISOString();saveResumes();const p=$('resume-preview');if(p){p.style.setProperty('--accent',color);p.innerHTML=buildResumeHTML(r);}document.querySelectorAll('.color-option').forEach(el=>el.classList.toggle('active',el.style.background===color||rgbFromHex(el.style.background)===color));}
+function selectColor(color){const r=getCurrentResume();if(!r)return;r.accent_color=color;r.updatedAt=new Date().toISOString();saveResumes();const p=$('resume-preview');if(p){p.style.setProperty('--accent',color);p.innerHTML=(r.watermark?'<div class="watermark-overlay"></div>':'')+buildResumeHTML(r);}document.querySelectorAll('.color-option').forEach(el=>el.classList.toggle('active',el.style.background===color||rgbFromHex(el.style.background)===color));}
 function rgbFromHex(hex){const d=document.createElement('div');d.style.color=hex;document.body.appendChild(d);const rgb=getComputedStyle(d).color;document.body.removeChild(d);return rgb;}
 function togglePublicFromWizard(){const r=getCurrentResume();if(!r)return;r.isPublic=!r.isPublic;r.updatedAt=new Date().toISOString();saveResumes();navigate('wizard',{id:r.id});}
 
-/* ============================================================
-   BUILD RESUME HTML — with photo + socials
-   ============================================================ */
 function buildResumeHTML(r){
   const accent=r.accent_color||'var(--primary)';
   const contactParts=[];
@@ -1174,9 +1447,6 @@ function buildResumeHTML(r){
   return `${photoHTML}${order.map(k=>map[k]||'').join('')}`;
 }
 
-/* ============================================================
-   PREVIEW
-   ============================================================ */
 function renderPreview(id){
   state.currentResumeId=id;
   const r=getCurrentResume();if(!r){navigate('dashboard');return'';}
@@ -1191,13 +1461,13 @@ function renderPreview(id){
         <button class="secondary" onclick="navigate('dashboard')">${t('dashboard')}</button>
       </div>
     </div>
-    <div class="resume-preview-wrap font-${r.font||'inter'}" id="resume-preview">${buildResumeHTML(r)}</div>
+    <div class="resume-preview-wrap font-${r.font||'inter'} ${r.watermark?'has-watermark':''}" id="resume-preview">
+      ${r.watermark?'<div class="watermark-overlay"></div>':''}
+      ${buildResumeHTML(r)}
+    </div>
   </div></div>`;
 }
 
-/* ============================================================
-   PDF EXPORT
-   ============================================================ */
 async function exportPDF(){
   const preview=document.querySelector('.resume-preview-wrap');
   if(!preview)return alert('No preview found.');
@@ -1218,29 +1488,64 @@ async function exportPDF(){
 }
 function printResume(){window.print();}
 
-/* ============================================================
-   MODAL
-   ============================================================ */
 function openModal(html){$('modal-body').innerHTML=`<button class="modal-close" onclick="closeModal()">×</button>${html}`;$('modal-overlay').classList.add('show');}
 function closeModal(){$('modal-overlay').classList.remove('show');}
 
 /* ============================================================
-   QR CODE
+   QR CODE WITH LOGO (initials in center)
    ============================================================ */
 function showQR(){
   const r=getCurrentResume();if(!r)return;
   if(!r.isPublic)return alert('Publish the resume first.');
   const url=`${location.origin}${location.pathname}#/public/${r.id}`;
-  openModal(`<h3>${t('qr')}</h3><p class="muted" style="margin-bottom:14px;">Scan to open this resume.</p><div class="qr-preview"><div id="qr-target"></div><div class="qr-url">${url}</div>${r.portfolio_url?`<div class="qr-url">Portfolio: ${esc(r.portfolio_url)}</div>`:''}</div><div class="mt-3"><button class="secondary small" onclick="closeModal()">${t('close')}</button></div>`);
-  setTimeout(()=>{const target=$('qr-target');if(target&&window.QRCode){target.innerHTML='';new QRCode(target,{text:url,width:180,height:180,colorDark:'#111827',colorLight:'#ffffff'});}},50);
+  const initials=getInitials(r.full_name||r.title||'MR');
+  openModal(`<h3>${t('qr')}</h3><p class="modal-sub">${t('qrWithLogo')}</p><div class="qr-preview"><div id="qr-target"></div><div class="qr-url">${url}</div>${r.portfolio_url?`<div class="qr-url">Portfolio: ${esc(r.portfolio_url)}</div>`:''}</div><div class="mt-3" style="display:flex;gap:8px;"><button class="secondary small" onclick="closeModal()">${t('close')}</button></div>`);
+  setTimeout(()=>{
+    const target=$('qr-target');
+    if(target&&window.QRCode){
+      target.innerHTML='';
+      const wrapper=document.createElement('div');
+      target.appendChild(wrapper);
+      new QRCode(wrapper,{text:url,width:200,height:200,colorDark:'#111827',colorLight:'#ffffff'});
+      // After QR renders, overlay the initials on the canvas
+      setTimeout(()=>{
+        const canvas=wrapper.querySelector('canvas');
+        if(!canvas)return;
+        const ctx=canvas.getContext('2d');
+        const cx=canvas.width/2, cy=canvas.height/2;
+        const badgeRadius=canvas.width*0.11;
+        // White circle background
+        ctx.fillStyle='#ffffff';
+        ctx.beginPath();
+        ctx.arc(cx,cy,badgeRadius+4,0,Math.PI*2);
+        ctx.fill();
+        // Accent circle
+        const accent=r.accent_color||'#4f46e5';
+        ctx.fillStyle=accent;
+        ctx.beginPath();
+        ctx.arc(cx,cy,badgeRadius,0,Math.PI*2);
+        ctx.fill();
+        // Initials text
+        ctx.fillStyle='#ffffff';
+        ctx.font=`bold ${badgeRadius*0.85}px Inter, sans-serif`;
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+        ctx.fillText(initials,cx,cy+1);
+      },80);
+    }
+  },50);
 }
 
-/* ============================================================
-   SHARE
-   ============================================================ */
+function getInitials(name){
+  if(!name)return'MR';
+  const parts=String(name).trim().split(/\s+/);
+  if(parts.length===1)return parts[0].slice(0,2).toUpperCase();
+  return (parts[0][0]+parts[parts.length-1][0]).toUpperCase();
+}
+
 function showShareModal(){
   const r=getCurrentResume();if(!r)return;
-  openModal(`<h3>${t('shareTitle')}</h3><p class="muted">${t('shareDesc')}</p><label>${t('email')}</label><input id="share-email" type="email" placeholder="recruiter@company.com"><label>${t('note')}</label><textarea id="share-note" rows="3"></textarea><div class="mt-3" style="display:flex;gap:8px;"><button onclick="doShare()">${t('send')}</button><button class="secondary" onclick="closeModal()">${t('cancel')}</button></div><div id="share-existing"></div>`);
+  openModal(`<h3>${t('shareTitle')}</h3><p class="modal-sub">${t('shareDesc')}</p><label>${t('email')}</label><input id="share-email" type="email" placeholder="recruiter@company.com"><label>${t('note')}</label><textarea id="share-note" rows="3"></textarea><div class="mt-3" style="display:flex;gap:8px;"><button onclick="doShare()">${t('send')}</button><button class="secondary" onclick="closeModal()">${t('cancel')}</button></div><div id="share-existing"></div>`);
   const existing=state.shares.filter(s=>s.resume_id===r.id);
   if(existing.length){const el=$('share-existing');if(el)el.innerHTML=`<h4>Already shared with</h4><div class="share-list">${existing.map(s=>`<div class="share-item"><span>${esc(s.shared_with)}</span><button class="small danger" onclick="revokeShare('${s.id}')">×</button></div>`).join('')}</div>`;}
 }
@@ -1253,9 +1558,6 @@ function doShare(){
 }
 function revokeShare(id){state.shares=state.shares.filter(s=>s.id!==id);saveShares();closeModal();}
 
-/* ============================================================
-   ANALYTICS
-   ============================================================ */
 function showAnalytics(resumeId){
   const r=state.resumes.find(x=>x.id===resumeId);if(!r)return;
   const data=state.analytics[resumeId]||{views:[]};
@@ -1267,18 +1569,12 @@ function showAnalytics(resumeId){
   openModal(`<h3>${t('analytics')} — ${esc(r.title)}</h3><div class="stats-grid"><div class="stat-card"><div class="stat-value">${total}</div><div class="stat-label">${t('totalViews')}</div></div><div class="stat-card"><div class="stat-value">${last30}</div><div class="stat-label">${t('last30')}</div></div></div><h4>${t('last14')}</h4><div class="bar-chart">${days.map(d=>`<div class="bar" style="height:${(byDay[d]/max)*100}%"><span class="bar-label">${byDay[d]}</span></div>`).join('')}</div><div class="mt-3"><button class="secondary" onclick="closeModal()">${t('close')}</button></div>`);
 }
 
-/* ============================================================
-   RECRUITER PAGE
-   ============================================================ */
 function renderRecruiterPage(){
   if(!state.user||state.user.role!=='recruiter')return `<div class="page"><div class="container" style="padding-top:60px;text-align:center;"><h2>${t('recruiterOnly')}</h2><p class="muted mt-2">Register as a recruiter to see the inbox.</p><div class="mt-3"><button onclick="navigate('auth')">${t('register')}</button></div></div></div>`;
   const inbox=state.shares.filter(s=>s.shared_with===state.user.email);
   return `<div class="page"><div class="dashboard"><div class="recruiter-header"><span class="recruiter-badge">Recruiter</span><span>${t('inboxTitle')}</span></div><div class="resume-list stagger">${inbox.length===0?`<div class="empty-state">${t('inboxEmpty')}</div>`:inbox.map(s=>{const res=state.resumes.find(r=>r.id===s.resume_id);const views=(state.analytics[s.resume_id]?.views?.length)||0;return `<div class="resume-item"><div class="info"><h3>${esc(s.resume_title)}</h3><p class="meta">${esc(res?.full_name||'')}${res?.job_title?' · '+esc(res.job_title):''}</p><div class="stats"><span>👤 ${t('sharedBy')} ${esc(s.shared_by)}</span><span>👁️ ${views} ${t('views')}</span><span>📅 ${s.shared_at.slice(0,10)}</span></div>${s.note?`<p class="meta" style="margin-top:6px;">${t('note')}: ${esc(s.note)}</p>`:''}</div></div>`;}).join('')}</div></div></div>`;
 }
 
-/* ============================================================
-   PUBLIC PAGE (password gate)
-   ============================================================ */
 function renderPublicPage(id){
   const r=state.resumes.find(x=>x.id===id);
   if(!r||!r.isPublic)return `<div class="page"><div class="container" style="padding-top:60px;text-align:center;"><h2>Resume not found</h2></div></div>`;
@@ -1296,69 +1592,72 @@ function renderPublicPage(id){
     }
   }
   logView(id);
-  return `<div class="page"><div class="container" style="padding-top:40px;padding-bottom:80px;"><div class="resume-preview-wrap font-${r.font||'inter'}">${buildResumeHTML(r)}</div></div></div>`;
+  return `<div class="page"><div class="container" style="padding-top:40px;padding-bottom:80px;"><div class="resume-preview-wrap font-${r.font||'inter'} ${r.watermark?'has-watermark':''}">${r.watermark?'<div class="watermark-overlay"></div>':''}${buildResumeHTML(r)}</div></div></div>`;
 }
 function unlockPublic(id){
   const r=state.resumes.find(x=>x.id===id);if(!r)return;
   const pw=$('unlock-pw').value;
   if(pw!==r.password)return alert(t('wrongPassword'));
   sessionStorage.setItem('unlock_'+id,r.password);
-  renderPage('public',{id});
   const app=$('app'),cur=app.querySelector('.page');
   if(cur)cur.remove();
   renderPage('public',{id});
 }
 
 /* ============================================================
-   MINI PREVIEWS — 26 templates
+   MINI PREVIEWS
    ============================================================ */
 function renderTemplatePreview(id){
-  const P={classic:`<div class="mini mini-classic"><div class="name">JOHN DOE</div><div class="role">Software Engineer</div><div class="contact">john@email.com</div><div class="hr"></div><div class="section-h">Experience</div><div class="body"><div class="line m"></div><div class="line s"></div></div></div>`,
-  modern:`<div class="mini mini-modern"><div class="sb"><div class="name">JOHN<br>DOE</div><div class="role">Engineer</div><div style="margin-top:8px;height:5px;background:rgba(255,255,255,.9);border-radius:2px;width:45%"></div><div class="line"></div></div><div class="main"><div class="name">About</div><div class="line m"></div><div class="line s"></div></div></div>`,
-  minimal:`<div class="mini mini-minimal"><div class="name">John Doe</div><div class="role">Engineer</div><div class="section-h">Experience</div><div class="line m"></div><div class="line s"></div></div>`,
-  creative:`<div class="mini mini-creative"><div class="band"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="col"><div class="section-h">Exp</div><div class="line m"></div></div><div class="col"><div class="section-h">Skills</div><div class="line m"></div></div></div></div>`,
-  elegant:`<div class="mini mini-elegant"><div class="name">John Doe</div><div class="role">Engineer</div><div class="orn">❦</div><div class="section-h">Experience</div><div class="line m"></div></div>`,
-  bold:`<div class="mini mini-bold"><div class="top"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Exp</div><div class="line m"></div></div></div>`,
-  compact:`<div class="mini mini-compact"><div class="name">John Doe</div><div class="role">Engineer</div><div class="two-col"><div><div class="section-h">Exp</div><div class="line m"></div></div><div><div class="section-h">Edu</div><div class="line m"></div></div></div></div>`,
-  professional:`<div class="mini mini-pro"><div class="strip"></div><div class="head"><div><div class="name">John Doe</div><div class="role">Engineer</div></div></div><div class="body"><div><div class="section-h">Exp</div><div class="line m"></div></div><div><div class="section-h">Skills</div><div class="line m"></div></div></div></div>`,
-  'two-col':`<div class="mini mini-two-col"><div class="left"><div class="name">John Doe</div><div class="role">Engineer</div><div class="section-h">Contact</div><div class="line"></div></div><div class="right"><div class="section-h">Profile</div><div class="line m"></div></div></div>`,
-  timeline:`<div class="mini mini-timeline"><div class="name">John Doe</div><div class="role">Engineer</div><div class="tl"><div class="tl-item"><div class="line m"></div></div><div class="tl-item"><div class="line m"></div></div></div></div>`,
-  executive:`<div class="mini mini-executive"><div class="name">John Doe</div><div class="role">Executive</div><div class="divider"></div><div class="section-h">Summary</div><div class="line m"></div></div>`,
-  designer:`<div class="mini mini-designer"><div class="hero"><div class="name">John Doe</div><div class="role">Designer</div></div><div class="body"><div class="section-h">About</div><div class="line m"></div></div></div>`,
-  tech:`<div class="mini mini-tech"><div class="prompt">$ whoami</div><div class="name">John Doe</div><div class="role">Full Stack</div><div class="section-h">Stack</div><div class="line m"></div></div>`,
-  academic:`<div class="mini mini-academic"><div class="name">Dr. John Doe</div><div class="role">Researcher</div><div class="section-h">Publications</div><div class="pub">Doe, J. (2023).</div></div>`,
-  corporate:`<div class="mini mini-corporate"><div class="band"><div class="name">JOHN DOE</div><div class="role">Manager</div></div><div class="body"><div class="section-h">Exp</div><div class="line m"></div></div></div>`,
-  gradient:`<div class="mini mini-gradient"><div class="top"><div class="name">John Doe</div><div class="role">Designer</div></div><div class="body"><div><div class="section-h">Exp</div><div class="line m"></div></div><div><div class="section-h">Skills</div><div class="line m"></div></div></div></div>`,
-  magazine:`<div class="mini mini-magazine"><div class="cover"><div class="name">John Doe</div><div class="role">Editor</div></div><div class="body"><div class="section-h">Story</div><div class="line m"></div></div></div>`,
-  split:`<div class="mini mini-split"><div class="left"><div class="name">John<br>Doe</div><div class="role">Engineer</div><div class="section-h">Contact</div><div class="line"></div></div><div class="right"><div class="section-h">Profile</div><div class="line m"></div></div></div>`,
-  metro:`<div class="mini mini-metro"><div class="grid"><div class="cell hero"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="cell"><div class="section-h">Skills</div><div class="line"></div></div><div class="cell"><div class="section-h">Exp</div><div class="line"></div></div><div class="cell"><div class="section-h">Edu</div><div class="line"></div></div></div></div>`,
-  spotlight:`<div class="mini mini-spotlight"><div class="head"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div></div></div>`,
-  diamond:`<div class="mini mini-diamond"><div class="cap"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div></div></div>`,
-  aurora:`<div class="mini mini-aurora"><div class="top"><div class="name">John Doe</div><div class="role">Designer</div></div><div class="body"><div><div class="section-h">Exp</div><div class="line m"></div></div><div><div class="section-h">Skills</div><div class="line m"></div></div></div></div>`,
-  nordic:`<div class="mini mini-nordic"><div class="head"><div class="name">JOHN DOE</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div></div></div>`,
-  futuristic:`<div class="mini mini-futuristic"><div class="head"><div class="name">John Doe</div><div class="role">Developer</div></div><div class="body"><div class="section-h">Stack</div><div class="line m"></div></div></div>`,
-  pastel:`<div class="mini mini-pastel"><div class="head"><div class="name">John Doe</div><div class="role">Writer</div></div><div class="body"><div><div class="section-h">Exp</div><div class="line m"></div></div><div><div class="section-h">Edu</div><div class="line m"></div></div></div></div>`,
-  mono:`<div class="mini mini-mono"><div class="head"><div class="name">JOHN DOE</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div></div></div>`};
+  const P={
+    classic:`<div class="mini mini-classic"><div class="name">JOHN DOE</div><div class="role">Software Engineer</div><div class="contact">john@email.com</div><div class="hr"></div><div class="section-h">Experience</div><div class="body"><div class="line m"></div><div class="line s"></div></div></div>`,
+    modern:`<div class="mini mini-modern"><div class="sb"><div class="name">JOHN<br>DOE</div><div class="role">Engineer</div><div style="margin-top:8px;height:5px;background:rgba(255,255,255,.9);border-radius:2px;width:45%"></div><div class="line"></div></div><div class="main"><div class="name">About</div><div class="line m"></div><div class="line s"></div></div></div>`,
+    minimal:`<div class="mini mini-minimal"><div class="name">John Doe</div><div class="role">Engineer</div><div class="section-h">Experience</div><div class="line m"></div><div class="line s"></div></div>`,
+    creative:`<div class="mini mini-creative"><div class="band"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="col"><div class="section-h">Exp</div><div class="line m"></div></div><div class="col"><div class="section-h">Skills</div><div class="line m"></div></div></div></div>`,
+    elegant:`<div class="mini mini-elegant"><div class="name">John Doe</div><div class="role">Engineer</div><div class="orn">❦</div><div class="section-h">Experience</div><div class="line m"></div></div>`,
+    bold:`<div class="mini mini-bold"><div class="top"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Exp</div><div class="line m"></div></div></div>`,
+    compact:`<div class="mini mini-compact"><div class="name">John Doe</div><div class="role">Engineer</div><div class="two-col"><div><div class="section-h">Exp</div><div class="line m"></div></div><div><div class="section-h">Edu</div><div class="line m"></div></div></div></div>`,
+    professional:`<div class="mini mini-pro"><div class="strip"></div><div class="head"><div><div class="name">John Doe</div><div class="role">Engineer</div></div></div><div class="body"><div><div class="section-h">Exp</div><div class="line m"></div></div><div><div class="section-h">Skills</div><div class="line m"></div></div></div></div>`,
+    'two-col':`<div class="mini mini-two-col"><div class="left"><div class="name">John Doe</div><div class="role">Engineer</div><div class="section-h">Contact</div><div class="line"></div></div><div class="right"><div class="section-h">Profile</div><div class="line m"></div></div></div>`,
+    timeline:`<div class="mini mini-timeline"><div class="name">John Doe</div><div class="role">Engineer</div><div class="tl"><div class="tl-item"><div class="line m"></div></div><div class="tl-item"><div class="line m"></div></div></div></div>`,
+    executive:`<div class="mini mini-executive"><div class="name">John Doe</div><div class="role">Executive</div><div class="divider"></div><div class="section-h">Summary</div><div class="line m"></div></div>`,
+    designer:`<div class="mini mini-designer"><div class="hero"><div class="name">John Doe</div><div class="role">Designer</div></div><div class="body"><div class="section-h">About</div><div class="line m"></div></div></div>`,
+    tech:`<div class="mini mini-tech"><div class="prompt">$ whoami</div><div class="name">John Doe</div><div class="role">Full Stack</div><div class="section-h">Stack</div><div class="line m"></div></div>`,
+    academic:`<div class="mini mini-academic"><div class="name">Dr. John Doe</div><div class="role">Researcher</div><div class="section-h">Publications</div><div class="pub">Doe, J. (2023).</div></div>`,
+    corporate:`<div class="mini mini-corporate"><div class="band"><div class="name">JOHN DOE</div><div class="role">Manager</div></div><div class="body"><div class="section-h">Exp</div><div class="line m"></div></div></div>`,
+    gradient:`<div class="mini mini-gradient"><div class="top"><div class="name">John Doe</div><div class="role">Designer</div></div><div class="body"><div><div class="section-h">Exp</div><div class="line m"></div></div><div><div class="section-h">Skills</div><div class="line m"></div></div></div></div>`,
+    magazine:`<div class="mini mini-magazine"><div class="cover"><div class="name">John Doe</div><div class="role">Editor</div></div><div class="body"><div class="section-h">Story</div><div class="line m"></div></div></div>`,
+    split:`<div class="mini mini-split"><div class="left"><div class="name">John<br>Doe</div><div class="role">Engineer</div><div class="section-h">Contact</div><div class="line"></div></div><div class="right"><div class="section-h">Profile</div><div class="line m"></div></div></div>`,
+    metro:`<div class="mini mini-metro"><div class="grid"><div class="cell hero"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="cell"><div class="section-h">Skills</div><div class="line"></div></div><div class="cell"><div class="section-h">Exp</div><div class="line"></div></div><div class="cell"><div class="section-h">Edu</div><div class="line"></div></div></div></div>`,
+    spotlight:`<div class="mini mini-spotlight"><div class="head"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div></div></div>`,
+    diamond:`<div class="mini mini-diamond"><div class="cap"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div></div></div>`,
+    aurora:`<div class="mini mini-aurora"><div class="top"><div class="name">John Doe</div><div class="role">Designer</div></div><div class="body"><div><div class="section-h">Exp</div><div class="line m"></div></div><div><div class="section-h">Skills</div><div class="line m"></div></div></div></div>`,
+    nordic:`<div class="mini mini-nordic"><div class="head"><div class="name">JOHN DOE</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div></div></div>`,
+    futuristic:`<div class="mini mini-futuristic"><div class="head"><div class="name">John Doe</div><div class="role">Developer</div></div><div class="body"><div class="section-h">Stack</div><div class="line m"></div></div></div>`,
+    pastel:`<div class="mini mini-pastel"><div class="head"><div class="name">John Doe</div><div class="role">Writer</div></div><div class="body"><div><div class="section-h">Exp</div><div class="line m"></div></div><div><div class="section-h">Edu</div><div class="line m"></div></div></div></div>`,
+    mono:`<div class="mini mini-mono"><div class="head"><div class="name">JOHN DOE</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div></div></div>`,
+    /* SEASONAL */
+    halloween:`<div class="mini mini-halloween"><div class="head"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div><div class="line s"></div></div></div>`,
+    holiday:`<div class="mini mini-holiday"><div class="head"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="divider"></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div><div class="line s"></div></div></div>`,
+    spring:`<div class="mini mini-spring"><div class="head"><div class="name">John Doe</div><div class="role">Designer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div><div class="line s"></div></div></div>`,
+    summer:`<div class="mini mini-summer"><div class="head"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div><div class="line s"></div></div></div>`,
+    autumn:`<div class="mini mini-autumn"><div class="head"><div class="name">John Doe</div><div class="role">Writer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div><div class="line s"></div></div></div>`,
+    winter:`<div class="mini mini-winter"><div class="head"><div class="name">John Doe</div><div class="role">Engineer</div></div><div class="body"><div class="section-h">Experience</div><div class="line m"></div><div class="line s"></div></div></div>`
+  };
   return P[id]||'';
 }
 
-/* ============================================================
-   INIT
-   ============================================================ */
 document.addEventListener('DOMContentLoaded',()=>{
   document.documentElement.setAttribute('data-theme',state.theme);
   const sel=$('lang-select');if(sel)sel.value=state.language;
   renderThemePanel();applyTranslations();applyRoleUI();
-  // Handle hash-based public URLs
   if(location.hash.startsWith('#/public/')){const id=location.hash.split('/')[2];navigate('public',{id});}
   else navigate('landing');
-  // Watch for system theme changes
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',(e)=>{
     if(!localStorage.getItem('theme'))setTheme(e.matches?'dark':'light');
   });
 });
 
-Object.assign(window,{navigate,setTheme,toggleThemePanel,setLanguage,useTemplate,editResume,deleteResume,togglePublic,previewResume,goToStep,nextStep,prevStep,addExperience,delExperience,addEducation,delEducation,addSkill,delSkill,selectTemplate,selectFont,selectColor,togglePublicFromWizard,exportPDF,printResume,showQR,showShareModal,doShare,revokeShare,showAnalytics,closeModal,logout,doAuthRegister,debouncedHeading,debouncedSummary,handlePhotoUpload,removePhoto,togglePasswordProtect,setResumePassword,togglePhotoVisibility,unlockPublic});
+Object.assign(window,{navigate,setTheme,toggleThemePanel,setLanguage,useTemplate,editResume,deleteResume,togglePublic,previewResume,goToStep,nextStep,prevStep,addExperience,delExperience,addEducation,delEducation,addSkill,delSkill,selectTemplate,selectFont,selectColor,togglePublicFromWizard,exportPDF,printResume,showQR,showShareModal,doShare,revokeShare,showAnalytics,closeModal,logout,doAuthRegister,debouncedHeading,debouncedSummary,handlePhotoUpload,removePhoto,togglePasswordProtect,setResumePassword,togglePhotoVisibility,toggleWatermark,unlockPublic,startBlankResume,showImportModal,importSampleResume});
 </script>
 </body>
 </html>
