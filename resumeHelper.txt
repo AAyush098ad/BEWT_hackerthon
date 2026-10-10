@@ -1,0 +1,28 @@
+const db = require('./db');
+
+function getFullResume(id) {
+  const resume = db.prepare('SELECT * FROM resumes WHERE id = ?').get(id);
+  if (!resume) return null;
+
+  return {
+    ...resume,
+    is_public: !!resume.is_public,
+    educations: db
+      .prepare('SELECT * FROM educations WHERE resume_id = ? ORDER BY end_year DESC, id')
+      .all(id),
+    experiences: db
+      .prepare('SELECT * FROM experiences WHERE resume_id = ? ORDER BY id')
+      .all(id),
+    skills: db.prepare('SELECT * FROM skills WHERE resume_id = ? ORDER BY id').all(id),
+    projects: db.prepare('SELECT * FROM projects WHERE resume_id = ? ORDER BY id').all(id)
+  };
+}
+
+function getPublicResumeBySlug(slug) {
+  const resume = db
+    .prepare('SELECT * FROM resumes WHERE slug = ? AND is_public = 1')
+    .get(slug);
+  return resume ? getFullResume(resume.id) : null;
+}
+
+module.exports = { getFullResume, getPublicResumeBySlug };
