@@ -1536,7 +1536,8 @@ function stepFinalize(r){
   ${r.password?`<div class="mt-2"><label>Set Password</label><input type="text" value="${esc(r.password)}" onchange="setResumePassword(this.value)"></div>`:''}
   <label class="toggle mt-2"><input type="checkbox" ${r.watermark?'checked':''} onchange="toggleWatermark(this.checked)"><span>💧 Add watermark on PDF</span></label>
   <h3 style="font-size:1rem;margin:28px 0 10px;">Preview</h3>
-  <div class="resume-preview-wrap font-${r.font||'inter'} ${r.watermark?'has-watermark':''}" id="resume-preview">
+ <div class="resume-preview-wrap font-${r.font||'inter'} template-${r.template||'classic'} ${r.watermark?'has-watermark':''}" id="resume-preview">
+  
     ${r.watermark?'<div class="watermark-overlay"></div>':''}
     ${buildResumeHTML(r)}
   </div>
@@ -1573,7 +1574,21 @@ function saveSectionOrder(){
   r.section_order=JSON.stringify(order);saveResumes();
   const prev=$('resume-preview');if(prev)prev.innerHTML=(r.watermark?'<div class="watermark-overlay"></div>':'')+buildResumeHTML(r);
 }
-function selectTemplate(id){const r=getCurrentResume();if(!r)return;r.template=id;saveResumes();navigate('wizard',{id:r.id});}
+function selectTemplate(id){
+  const r=getCurrentResume();if(!r)return;
+  r.template=id;saveResumes();
+  // update the preview instantly without a full reload
+  const p=$('resume-preview');
+  if(p){
+    // remove old template class
+    [...p.classList].forEach(c=>{ if(c.startsWith('template-')) p.classList.remove(c); });
+    p.classList.add('template-'+id);
+  }
+  // update selected state on the picker
+  document.querySelectorAll('.template-option').forEach(el=>{
+    el.classList.toggle('selected', el.getAttribute('onclick')?.includes("'"+id+"'"));
+  });
+}
 function selectFont(id){const r=getCurrentResume();if(!r)return;r.font=id;saveResumes();const p=$('resume-preview');if(p){FONTS.forEach(f=>p.classList.remove('font-'+f.id));p.classList.add('font-'+id);}document.querySelectorAll('.font-option').forEach(el=>el.classList.toggle('active',el.dataset.font===id));}
 function selectColor(color){const r=getCurrentResume();if(!r)return;r.accent_color=color;saveResumes();const p=$('resume-preview');if(p){p.innerHTML=(r.watermark?'<div class="watermark-overlay"></div>':'')+buildResumeHTML(r);}document.querySelectorAll('.color-option').forEach(el=>el.classList.toggle('active',el.style.background===color));}
 function togglePublicFromWizard(){const r=getCurrentResume();if(!r)return;r.isPublic=!r.isPublic;saveResumes();navigate('wizard',{id:r.id});}
@@ -1608,8 +1623,7 @@ function renderPreview(id){
         <button class="secondary" onclick="navigate('dashboard')">Dashboard</button>
       </div>
     </div>
-    <div class="resume-preview-wrap font-${r.font||'inter'} ${r.watermark?'has-watermark':''}" id="resume-preview">
-      ${r.watermark?'<div class="watermark-overlay"></div>':''}
+<div class="resume-preview-wrap font-${r.font||'inter'} template-${r.template||'classic'} ${r.watermark?'has-watermark':''}" id="resume-preview">      ${r.watermark?'<div class="watermark-overlay"></div>':''}
       ${buildResumeHTML(r)}
     </div>
   </div></div>`;
